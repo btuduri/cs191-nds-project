@@ -20,12 +20,13 @@ private:
 		int16 startY;
 		int16 endY;
 	} ClickRange;
-public:
+
 	bool isClickable;
 	Position curPos;
 	ClickRange range;
+	const unsigned short * activeBG;
 	//TODO: ADD sprites to objects if needed
-
+public:
 	basicObject(){
 			
 		}
@@ -58,7 +59,9 @@ public:
 	void setRange(int16 startX, int16 startY, int16 endX, int16 endY);
 	void setStartPos(int16 x, int16 y);
 	bool canBeClicked();
-	bool wasClicked(int16 x, int16 y); 
+	bool wasClicked(int16 x, int16 y);
+	void attachBG(const unsigned short * bg);
+	bool isCurrentBG(const unsigned short * bg);
 	
 	
 };

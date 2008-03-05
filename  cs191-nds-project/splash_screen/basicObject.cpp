@@ -7,6 +7,9 @@ bool basicObject::canBeClicked() {
 }
 
 bool basicObject::wasClicked(int16 x, int16 y) {
+	if (!canBeClicked()){
+		return false;
+	}
 	if (x > range.startX && x < range.endX) {
 		if (y < range.endY && y > range.startY)
 			return true;
@@ -25,5 +28,16 @@ void basicObject::setRange(int16 startX, int16 startY, int16 endX, int16 endY) {
 void basicObject::setStartPos(int16 x, int16 y) {
 	curPos.x = x;
 	curPos.y = y;
+}
+
+void basicObject::attachBG(const unsigned short *bg){
+	activeBG = bg;
+}
+
+bool basicObject::isCurrentBG(const unsigned short *bg){
+	if (activeBG == bg){
+		return true;
+	}
+	return false;
 }
 
