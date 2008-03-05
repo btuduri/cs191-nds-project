@@ -102,9 +102,10 @@ int main(void) {
 	cScreenManager *sm = new cScreenManager();
 
 	MenuButton * firstButton = new MenuButton();
+	MenuButton * secondButton = new MenuButton();
 	firstButton->setRange((int16)(SCREEN_WIDTH/3), (int16) 0,
 			(int16)(SCREEN_WIDTH/3 * 2), (int16)(SCREEN_HEIGHT/3));
-
+	firstButton->attachBG(menu1Bitmap);
 	powerON(POWER_ALL);
 	irqInit();
 	irqSet(IRQ_VBLANK, 0);
@@ -161,8 +162,10 @@ int main(void) {
 
 			key_changed = false;
 		}
-		if (firstButton->wasClicked(touchXY.px, touchXY.py)) {
-			dmaCopy(menu1Bitmap, (u16*)BG_BMP_RAM(0), menu1BitmapLen);
+		if (firstButton->isCurrentBG(menu1Bitmap)){
+			if (firstButton->wasClicked(touchXY.px, touchXY.py)) {
+						dmaCopy(menu1Bitmap, (u16*)BG_BMP_RAM(0), menu1BitmapLen);
+			}
 		}
 		swiWaitForVBlank();
 		swiDelay(1500000);
