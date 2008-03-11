@@ -48,9 +48,8 @@ _menu incons_
 
 
 *Characters*
-  *define what animations there are (i.e. idle, run, attack, etc)
-  *chacter stats
+  * define what animations there are (i.e. idle, run, attack, etc)
+  * chacter stats
 
 _Mario_
 etc..
-
