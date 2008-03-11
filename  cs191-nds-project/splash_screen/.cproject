@@ -22,7 +22,7 @@
 <targetPlatform archList="all" binaryParser="org.scarab.nds.managedbuilder.parser.NDSParser;org.eclipse.cdt.core.ELF" id="nds.managedbuilder.targetplatform.release.eabi.1040098915" isAbstract="false" name="Release" osList="win32,linux" superClass="nds.managedbuilder.targetplatform.release.eabi"/>
 <builder autoBuildTarget="all" buildPath="${workspace_loc:/splash_screen/Release}" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="nds.managedbuilder.builder.release.eabi.1180458614" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make" superClass="nds.managedbuilder.builder.release.eabi"/>
 <tool id="nds.managedbuilder.tool.c.compiler.release.eabi.1029523756" name="GCC C Compiler" superClass="nds.managedbuilder.tool.c.compiler.release.eabi">
-<option id="gnu.c.compiler.option.include.paths.1970230568" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+<option id="gnu.c.compiler.option.include.paths.1970230568" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="include"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1713667599" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -60,6 +60,7 @@
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 
 <storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
+
 
 <storageModule moduleId="scannerConfiguration">
 <autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile"/>
