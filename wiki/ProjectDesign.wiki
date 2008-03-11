@@ -6,9 +6,9 @@ This is a rough design of our project
 
 = Details =
 
-*Screen Manager*
-_Screen_ \n
-_Basic object_ \n
+*Screen Manager* ==
+_Screen_ ==
+_Basic object_ ==
 
 *Screen* \n
 *nextScreen() \n
