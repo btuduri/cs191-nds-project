@@ -7,13 +7,13 @@ This is a rough design of our project
 = Details =
 
 *Screen Manager*
-_Screen_
-_Basic object_
+_Screen_ \n
+_Basic object_ \n
 
-*Screen*
-*nextScreen()
-*int run()
-*input handler
+*Screen* \n
+*nextScreen() \n
+*int run() \n
+*input handler \n
 _title screen_
 _stats screen_
 _slpash screen_
