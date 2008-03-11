@@ -1,0 +1,30 @@
+#Project Design
+
+= Introduction =
+
+This is a rough design of our project
+
+= Details =
+
+==Screen Manager==
+===Screen===
+===Basic object===
+
+==Screen==
+- nextScreen()
+- int run()
+- input handler
+===title screen===
+===stats screen===
+===slpash screen===
+===selection screen===
+===options screen===
+===main gameplay screen===
+
+==Basic Object==
+- vitrual onInput(input button)
+- position
+- virtual onAction()
+===menu objects===
+===sprites===
+
