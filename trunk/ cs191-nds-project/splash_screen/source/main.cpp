@@ -94,7 +94,7 @@ void AnimateMario(void)
 	if(inc)
 	{
 		sprites.spriteBuffer[0].tileIdx = sprites.spriteBuffer[0].tileIdx + 128;
-		if(sprites.spriteBuffer[0].tileIdx == (128*6))
+		if(sprites.spriteBuffer[0].tileIdx == (128*5))
 			inc = false;
 	}
 	else
@@ -121,7 +121,7 @@ int main(void) {
 	irqSet(IRQ_VBLANK, 0);
 
 	// Setup Timer 3 to generate pulses every 1/4 second.
-	TIMER3_DATA = TIMER_FREQ_1024(6);
+	TIMER3_DATA = TIMER_FREQ_1024(12);
 	TIMER3_CR = TIMER_DIV_1024 | TIMER_IRQ_REQ | TIMER_ENABLE;
 	
 	irqSet(IRQ_TIMER3, AnimateMario);
