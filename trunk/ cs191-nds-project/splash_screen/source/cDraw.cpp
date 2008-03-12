@@ -51,11 +51,8 @@ void drawPixel(u16* buffer, Point p, Color c)
 void drawDot(u16* buffer, Point p, Color c, u16 size=1, bool hallow=false)
 {
 	for(int i = 0; i < size; i++)
-	{
-		
-		
+	{		
 	}
-	
 }
 
 /* function drawLine
