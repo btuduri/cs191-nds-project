@@ -3,6 +3,7 @@
 
 //Sprites
 #include "../graphics/mario.h"
+#include "cMarioSprite.h"
 
 tOAM sprites;
 
@@ -117,7 +118,7 @@ int cTitleMenuScreen::run()
 
     // Setup VRAM_B for Sprite Binary data
 	vramSetBankB(VRAM_B_MAIN_SPRITE_0x06400000);
-	
+	cMarioSprite mario;
 	// Numbered square sprite
 	sprites.spriteBuffer[0].colMode = OBJCOLOR_256;
 	sprites.spriteBuffer[0].objMode = OBJMODE_NORMAL;
