@@ -30,14 +30,4 @@ void basicObject::setStartPos(int16 x, int16 y) {
 	curPos.y = y;
 }
 
-void basicObject::attachBG(const unsigned short *bg){
-	activeBG = bg;
-}
-
-bool basicObject::isCurrentBG(const unsigned short *bg){
-	if (activeBG == bg){
-		return true;
-	}
-	return false;
-}
 
