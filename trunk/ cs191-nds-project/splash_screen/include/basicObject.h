@@ -60,8 +60,6 @@ public:
 	void setStartPos(int16 x, int16 y);
 	bool canBeClicked();
 	bool wasClicked(int16 x, int16 y);
-	void attachBG(const unsigned short * bg);
-	bool isCurrentBG(const unsigned short * bg);
 	
 	
 };

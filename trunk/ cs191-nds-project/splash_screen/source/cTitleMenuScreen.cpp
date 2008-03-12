@@ -97,10 +97,15 @@ int cTitleMenuScreen::run()
 
 	MenuButton * firstButton = new MenuButton();
 	MenuButton * secondButton = new MenuButton();
-	firstButton->setRange((int16)(SCREEN_WIDTH/3), (int16) 0,
-			(int16)(SCREEN_WIDTH/3 * 2), (int16)(SCREEN_HEIGHT/3));
-	firstButton->attachBG(menu1Bitmap);
-
+	MenuButton * thirdButton = new MenuButton();
+	
+	firstButton->setRange(BUTTON1_STARTX, BUTTON1_STARTY,
+			BUTTON1_ENDX, BUTTON1_ENDY);
+	secondButton->setRange(BUTTON2_STARTX, BUTTON2_STARTY,
+			BUTTON2_ENDX, BUTTON2_ENDY);
+	thirdButton->setRange(BUTTON3_STARTX, BUTTON3_STARTY,
+				BUTTON3_ENDX, BUTTON3_ENDY);
+	
 	// Setup Timer 3 to generate pulses every 1/4 second.
 	TIMER3_DATA = TIMER_FREQ_1024(12);
 	TIMER3_CR = TIMER_DIV_1024 | TIMER_IRQ_REQ | TIMER_ENABLE;
@@ -169,11 +174,17 @@ int cTitleMenuScreen::run()
 
 			key_changed = false;
 		}
-		if (firstButton->isCurrentBG(menu1Bitmap)){
-			if (firstButton->wasClicked(touchXY.px, touchXY.py)) {
-						dmaCopy(menu1Bitmap, (u16*)BG_BMP_RAM(0), menu1BitmapLen);
-			}
+		
+		if (firstButton->wasClicked(touchXY.px, touchXY.py)) {
+					dmaCopy(menu1Bitmap, (u16*)BG_BMP_RAM(0), menu1BitmapLen);
 		}
+		else if (secondButton->wasClicked(touchXY.px, touchXY.py)) {
+					dmaCopy(menu2Bitmap, (u16*)BG_BMP_RAM(0), menu2BitmapLen);
+		}
+		else if (thirdButton->wasClicked(touchXY.px, touchXY.py)) {
+			dmaCopy(menu3Bitmap, (u16*)BG_BMP_RAM(0), menu3BitmapLen);
+		}
+		
 		swiWaitForVBlank();
 		updateOAM();
 		swiDelay(1500000);
