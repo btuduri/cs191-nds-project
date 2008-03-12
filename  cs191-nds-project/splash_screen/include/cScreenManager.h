@@ -1,15 +1,8 @@
 #ifndef CSCREENMANAGER_H_
 #define CSCREENMANAGER_H_
 
-#include <nds.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <cassert>
-
-#include "cColor.h"
-#include "cPoint.h"
-#include "cDraw.h"
+#include "cSplashScreen.h"
+#include "projectlib.h"
 
 #define BG0	0
 #define BG1	1
@@ -38,17 +31,16 @@ public:
 	cScreenManager();
 	~cScreenManager();
 	
-	int setScreenMode(uint32 screen, uint32 mode, bool is3d);
-	int setBG() {return 0;}
-	int drawBG(const void * image, uint32 size, int bg, int screen) {return 0;}
-	
+	//int setBG() {return 0;}
+	//int drawBG(const void * image, uint32 size, int bg, int screen) {return 0;}
+	int run(int screen);
 	
 private:
 	
-	u16*	mainBG[4];	// screen backgrounds for main screen
-	u16*	subBG2[4];	// screen backgrounds for sub screen
+	//u16*	mainBG[4];	// screen backgrounds for main screen
+	//u16*	subBG2[4];	// screen backgrounds for sub screen
 	
-	u16	main_screen;	// this value is set to either TOP or BOTTOM.  the sub screen is the opposite of this value
+	//u16	main_screen;	// this value is set to either TOP or BOTTOM.  the sub screen is the opposite of this value
 	
 	
 };
