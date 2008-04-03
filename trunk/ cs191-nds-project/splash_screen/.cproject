@@ -16,7 +16,7 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactExtension="nds" artifactName="splash_screen" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="nds.managedbuilder.config.release.eabi.660161241" name="Release" parent="nds.managedbuilder.config.release.eabi">
+<configuration artifactExtension="nds" artifactName="splash_screen" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="nds.managedbuilder.config.release.eabi.660161241" name="Release" parent="nds.managedbuilder.config.release.eabi" postannouncebuildStep="" postbuildStep="" preannouncebuildStep="" prebuildStep="">
 <folderInfo id="nds.managedbuilder.config.release.eabi.660161241." name="/" resourcePath="">
 <toolChain id="nds.managedbuilder.toolchain.release.eabi.204067933" name="GCC Toolchain" superClass="nds.managedbuilder.toolchain.release.eabi">
 <targetPlatform archList="all" binaryParser="org.scarab.nds.managedbuilder.parser.NDSParser;org.eclipse.cdt.core.ELF" id="nds.managedbuilder.targetplatform.release.eabi.1040098915" isAbstract="false" name="Release" osList="win32,linux" superClass="nds.managedbuilder.targetplatform.release.eabi"/>
@@ -55,11 +55,16 @@
 <tool id="nds.managedbuilder.tool.ndstool.release.eabi.1124345258" name="NDS Tool" superClass="nds.managedbuilder.tool.ndstool.release.eabi"/>
 </toolChain>
 </folderInfo>
+<sourceEntries>
+<entry excluding="source" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="source"/>
+</sourceEntries>
 </configuration>
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 
 <storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
+
 
 
 <storageModule moduleId="scannerConfiguration">

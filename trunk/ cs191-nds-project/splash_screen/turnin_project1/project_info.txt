@@ -1,0 +1,11 @@
+Project Members:
+Ben Osborn
+Brian Weiner
+
+Project Codename:
+Minimashers
+
+Here's what each of use has done:
+We both worked on a basic design which is on paper and in our google wiki (which you'd need a google account to access)
+Ben did most of the structure code and Brian did the screen selection code (i.e creating clickable buttons on the screen).
+Ben also created the graphics and sprites.
