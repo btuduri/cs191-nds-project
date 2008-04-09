@@ -60,7 +60,7 @@
 </option>
 </tool>
 <tool id="nds.managedbuilder.tool.as.release.eabi.1652985977" name="GCC Assembler" superClass="nds.managedbuilder.tool.as.release.eabi">
-<option id="gnu.both.asm.option.include.paths.402389800" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+<option id="gnu.both.asm.option.include.paths.402389800" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="C:/devkitPro/projects/CS191_Project/Release/include"/>
 <listOptionValue builtIn="false" value="C:/devkitPro/devkitARM/include/c++/4.1.2"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/CS191_Project/include/MarioAnimations}&quot;"/>
