@@ -20,20 +20,30 @@
 <folderInfo id="nds.managedbuilder.config.release.eabi.660161241." name="/" resourcePath="">
 <toolChain id="nds.managedbuilder.toolchain.release.eabi.204067933" name="GCC Toolchain" superClass="nds.managedbuilder.toolchain.release.eabi">
 <targetPlatform archList="all" binaryParser="org.scarab.nds.managedbuilder.parser.NDSParser;org.eclipse.cdt.core.ELF" id="nds.managedbuilder.targetplatform.release.eabi.1040098915" isAbstract="false" name="Release" osList="win32,linux" superClass="nds.managedbuilder.targetplatform.release.eabi"/>
-<builder autoBuildTarget="all" buildPath="${workspace_loc:/CS191_Project/Release}" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="nds.managedbuilder.builder.release.eabi.1180458614" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make" superClass="nds.managedbuilder.builder.release.eabi"/>
+<builder autoBuildTarget="all" buildPath="${workspace_loc:/CS191_Project/Release}" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="nds.managedbuilder.builder.release.eabi.1180458614" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make" superClass="nds.managedbuilder.builder.release.eabi">
+<outputEntries>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Release"/>
+</outputEntries>
+</builder>
 <tool id="nds.managedbuilder.tool.c.compiler.release.eabi.1029523756" name="GCC C Compiler" superClass="nds.managedbuilder.tool.c.compiler.release.eabi">
 <option id="gnu.c.compiler.option.include.paths.1970230568" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="include"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/projects/CS191_Project/Release/include"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/devkitARM/include/c++/4.1.2"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/CS191_Project/include/MarioAnimations}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/CS191_Project/include}&quot;"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/devkitARM/arm-eabi/include"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/libnds/include"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1713667599" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="nds.managedbuilder.tool.cpp.compiler.release.eabi.1113279002" name="GCC C++ Compiler" superClass="nds.managedbuilder.tool.cpp.compiler.release.eabi">
 <option id="gnu.cpp.compiler.option.include.paths.719287548" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;C:\devkitPro\devkitARM\include\c++\4.1.2&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/MarioAnimations}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;C:\devkitPro\devkitARM\arm-eabi\include&quot;"/>
-<listOptionValue builtIn="false" value="&quot;C:\devkitPro\libnds\include&quot;"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/projects/CS191_Project/Release/include"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/devkitARM/include/c++/4.1.2"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/CS191_Project/include/MarioAnimations}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/CS191_Project/include}&quot;"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/devkitARM/arm-eabi/include"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/libnds/include"/>
 </option>
 <option id="gnu.cpp.compiler.option.other.verbose.774821789" name="Verbose (-v)" superClass="gnu.cpp.compiler.option.other.verbose" value="true" valueType="boolean"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1030579441" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -50,6 +60,14 @@
 </option>
 </tool>
 <tool id="nds.managedbuilder.tool.as.release.eabi.1652985977" name="GCC Assembler" superClass="nds.managedbuilder.tool.as.release.eabi">
+<option id="gnu.both.asm.option.include.paths.402389800" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+<listOptionValue builtIn="false" value="C:/devkitPro/projects/CS191_Project/Release/include"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/devkitARM/include/c++/4.1.2"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/CS191_Project/include/MarioAnimations}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/CS191_Project/include}&quot;"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/devkitARM/arm-eabi/include"/>
+<listOptionValue builtIn="false" value="C:/devkitPro/libnds/include"/>
+</option>
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.760533042" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
 <tool id="nds.managedbuilder.tool.objcopy.release.eabi.2086479292" name="Object Copy" superClass="nds.managedbuilder.tool.objcopy.release.eabi"/>
@@ -58,7 +76,6 @@
 </folderInfo>
 <sourceEntries>
 <entry excluding="source" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="source"/>
 </sourceEntries>
 </configuration>
 </storageModule>
