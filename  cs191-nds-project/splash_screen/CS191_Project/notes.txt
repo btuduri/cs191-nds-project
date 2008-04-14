@@ -1,0 +1,16 @@
+/**
+ * CSpriteManager
+ * 		- init ALL sprites ( zero them out )
+ * 		- updateOAM
+ * 		- registerSprite (returns an unused index)
+ * 		- unregisterSprite ( recieves a sprite * )
+ *
+ * CSprite
+ * 		- sprite width and height
+ *		- number of sprites within animation
+ * 		- sprite index
+ * 		- current selected sprite	(default at 0)
+ * 		- animation  ( int* animation[num of sprites] )
+ *  
+ * */
+
