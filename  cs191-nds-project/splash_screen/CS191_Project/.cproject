@@ -16,11 +16,11 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactExtension="nds" artifactName="Sprite_Rotation" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="nds.managedbuilder.config.release.eabi.660161241" name="Release" parent="nds.managedbuilder.config.release.eabi" postannouncebuildStep="" postbuildStep="" preannouncebuildStep="" prebuildStep="">
+<configuration artifactExtension="nds" artifactName="MiniMashers" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="nds.managedbuilder.config.release.eabi.660161241" name="Release" parent="nds.managedbuilder.config.release.eabi" postannouncebuildStep="" postbuildStep="" preannouncebuildStep="" prebuildStep="">
 <folderInfo id="nds.managedbuilder.config.release.eabi.660161241." name="/" resourcePath="">
 <toolChain id="nds.managedbuilder.toolchain.release.eabi.204067933" name="GCC Toolchain" superClass="nds.managedbuilder.toolchain.release.eabi">
 <targetPlatform archList="all" binaryParser="org.scarab.nds.managedbuilder.parser.NDSParser;org.eclipse.cdt.core.ELF" id="nds.managedbuilder.targetplatform.release.eabi.1040098915" isAbstract="false" name="Release" osList="win32,linux" superClass="nds.managedbuilder.targetplatform.release.eabi"/>
-<builder autoBuildTarget="all" buildPath="${workspace_loc:/Sprite_Rotation2/Release}" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="nds.managedbuilder.builder.release.eabi.1180458614" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make" superClass="nds.managedbuilder.builder.release.eabi"/>
+<builder autoBuildTarget="all" buildPath="${workspace_loc:/CS191_Project/Release}" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="nds.managedbuilder.builder.release.eabi.1180458614" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make" superClass="nds.managedbuilder.builder.release.eabi"/>
 <tool id="nds.managedbuilder.tool.c.compiler.release.eabi.1029523756" name="GCC C Compiler" superClass="nds.managedbuilder.tool.c.compiler.release.eabi">
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1713667599" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>

@@ -18,7 +18,7 @@ int CScreenManager::run(int screen)
 	switch(screen)
 	{
 		case SplashScreen: 
-			sc = new CSplashScreen;
+			sc = new CSplashScreen();
 			break;
 		case TitleMenuScreen:
 			sc = new CTitleMenuScreen();

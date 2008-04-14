@@ -114,11 +114,11 @@ int CPlaygroundScreen::run()
 	sm->registerSprite(mario);
 	player1 = mario;
 	
-/*	CMario * mario1 = new CMario();
+	CMario * mario1 = new CMario();
 	sm->registerSprite(mario1);
 	player2 = mario1;
 	player2->setPosition(150,50);
-*/
+
 	
 	// Setup Timer 2 for player 1
 	TIMER2_DATA = TIMER_FREQ_1024(8);
@@ -126,11 +126,11 @@ int CPlaygroundScreen::run()
 	irqSet(IRQ_TIMER2, 	player1Update);
 	
 	
-	/*// Setup Timer 3 for player 2
+	// Setup Timer 3 for player 2
 	TIMER3_DATA = TIMER_FREQ_1024(16);
 	TIMER3_CR = TIMER_DIV_1024 | TIMER_IRQ_REQ | TIMER_ENABLE;
 	irqSet(IRQ_TIMER3, 	player2Update);
-*/	
+	
 	// Copy the data from program memory to VRAM.
 	//dmaCopy(splashBitmap, (u16*)BG_BMP_RAM(0), splashBitmapLen);
 
