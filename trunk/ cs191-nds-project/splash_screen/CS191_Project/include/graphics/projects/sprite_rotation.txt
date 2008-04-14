@@ -1,0 +1,22 @@
+[general]
+input: sprite_rotation.png
+transparent: 0xFF00FF
+dimension: 1
+
+[sprite0]
+x: 0
+y: 0
+width: 64
+height: 64
+
+[sprite1]
+x: 64
+y: 0
+width: 64
+height: 64
+
+[sprite2]
+x: 128
+y: 0
+width: 64
+height: 64
