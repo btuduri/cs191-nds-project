@@ -17,15 +17,15 @@ int CScreenManager::run(int screen)
 	
 	switch(screen)
 	{
-		case SplashScreen: 
-			sc = new CSplashScreen();
-			break;
-		case TitleMenuScreen:
-			sc = new CTitleMenuScreen();
-			break;
-		case SpriteRotationScreen: 
-			sc = new CSpriteRotationScreen();
-			break;
+//		case SplashScreen: 
+//			sc = new CSplashScreen();
+//			break;
+//		case TitleMenuScreen:
+//			sc = new CTitleMenuScreen();
+//			break;
+//		case SpriteRotationScreen: 
+//			sc = new CSpriteRotationScreen();
+//			break;
 		case PlaygroundScreen:
 			sc = new CPlaygroundScreen();
 			break;

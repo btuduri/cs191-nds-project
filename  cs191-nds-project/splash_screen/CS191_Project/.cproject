@@ -27,13 +27,13 @@
 <tool id="nds.managedbuilder.tool.cpp.compiler.release.eabi.1113279002" name="GCC C++ Compiler" superClass="nds.managedbuilder.tool.cpp.compiler.release.eabi">
 <option id="gnu.cpp.compiler.option.include.paths.719287548" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="&quot;C:\devkitPro\devkitARM\include\c++\4.1.2&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Sprite_Rotation2/include/graphics}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Sprite_Rotation2/include/Screens}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Sprite_Rotation2/include/Sprites}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Sprite_Rotation2/include/Sprites/MarioAnimations}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;C:\devkitPro\projects\Sprite_Rotation2\include&quot;"/>
-<listOptionValue builtIn="false" value="&quot;C:\devkitPro\devkitARM\arm-eabi\include&quot;"/>
 <listOptionValue builtIn="false" value="&quot;C:\devkitPro\libnds\include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;C:\devkitPro\devkitARM\arm-eabi\include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/graphics}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/Screens}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/Sprites}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/Sprites/MarioAnimations}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include}&quot;"/>
 </option>
 <option id="gnu.cpp.compiler.option.other.verbose.774821789" name="Verbose (-v)" superClass="gnu.cpp.compiler.option.other.verbose" value="true" valueType="boolean"/>
 <option id="gnu.cpp.compiler.option.preprocessor.preprocess.1289549275" name="Preprocess only (-E)" superClass="gnu.cpp.compiler.option.preprocessor.preprocess" value="false" valueType="boolean"/>

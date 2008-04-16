@@ -6,8 +6,6 @@
 #include "graphics/projects/rotate_screen.h"
 //#include "../gfx/projects/sprite_rotation.h"
 
-#define FRAME_UPDATE 4
-
 CSprite *sprite1;
 CSprite *sprite2;
 CSprite *sprite3;

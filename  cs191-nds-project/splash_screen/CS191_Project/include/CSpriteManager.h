@@ -13,6 +13,7 @@
  * 		- unregisterSprite ( recieves a sprite * )
  */
 
+
 class CSpriteManager
 {
 public:
@@ -42,6 +43,9 @@ private:
 	u8 numSprites;
 	u8 nextAvailable;
 	u8 nextRotationIndex;
+
+	/* Keep track of the available tiles */
+	int nextAvailableTileIdx;
 };
 
 #endif /*CSPRITEMANAGER_H_*/
