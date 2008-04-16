@@ -9,6 +9,15 @@
 #define FACING_LEFT false
 #define FACING_RIGHT true
 
+static const int BYTES_PER_16_COLOR_TILE = 32;
+static const int COLORS_PER_PALETTE = 16;
+static const int BOUNDARY_VALUE = 32; /* This is the default boundary value
+                                           * (can be set in REG_DISPCNT) */
+static const int OFFSET_MULTIPLIER = BOUNDARY_VALUE /
+                                         sizeof(SPRITE_GFX[0]);
+
+
+
 class CSprite
 {
 public:
