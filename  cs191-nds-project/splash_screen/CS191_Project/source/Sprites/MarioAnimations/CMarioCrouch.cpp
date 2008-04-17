@@ -20,30 +20,33 @@ void CMarioCrouch::update(u16 index) {
     			(void*)&SPRITE_GFX[index * OFFSET_MULTIPLIER],
     			IMAGE_SIZE_64x64);//mario_idleBitmapLength);
 
-	if(isCrouching)	//crouching
-	{
+//	if(isCrouching)	//crouching
+//	{
 		if( curImage < (numImages - 1) )
 		{
 			curImage++;
-			//se->tileIdx = curImage * 128;
 		}
 		else
-			isCrouching = true;
-	}
-	else				//coming up
-	{
-		if( curImage > 0 )
 		{
-			curImage--;
-//			se->tileIdx = curImage * 128;			
+//			isCrouching = true;
+			locked = false;
 		}
-	}	
+	}
+//	else				//coming up
+//	{
+//		if( curImage > 0 )
+//		{
+//			curImage--;
+//		}
+//		else locked = false;
+//	}	
 
 }
 
 void CMarioCrouch::load() {
-	
-//	locked = true;
+
+	locked = true;
+	curImage = 0;
 	isCrouching = true;
 	
 	// Load the sprite palette.
@@ -52,5 +55,9 @@ void CMarioCrouch::load() {
 	// Load the sprite binary data into the VRAM
 //	dmaCopy(mario_crouchBitmap, SPRITE_GFX, mario_crouchBitmapLength);
 
+}
+
+void CMarioCrouch::forceUnlock() {
+	setIsCrouching(false);
 }
 

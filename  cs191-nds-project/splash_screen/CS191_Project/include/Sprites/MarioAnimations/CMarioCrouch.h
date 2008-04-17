@@ -12,6 +12,8 @@ public:
 
 	void update(u16 index);
 	void load();
+	//overloaded
+	void forceUnlock();
 	
 	void setIsCrouching(bool crouch) { isCrouching = crouch; }
 	
