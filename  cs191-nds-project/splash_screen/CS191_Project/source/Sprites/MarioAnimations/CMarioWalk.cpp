@@ -13,26 +13,26 @@ CMarioWalk::~CMarioWalk()
 {
 }
 
-void CMarioWalk::update(SpriteEntry *se) {
+void CMarioWalk::update(u16 index) {
 	
-	if(nextImage > curImage)	//increasing
-	{
-		curImage++;
-		if(nextImage == (numImages - 1))
-			nextImage--;
-		else
-			nextImage++;
-	}
-	else						//decreasing
-	{
-		curImage--;
-		if(nextImage == 0)
-			nextImage++;
-		else
-			nextImage--;
-	}	
+//	if(nextImage > curImage)	//increasing
+//	{
+//		curImage++;
+//		if(nextImage == (numImages - 1))
+//			nextImage--;
+//		else
+//			nextImage++;
+//	}
+//	else						//decreasing
+//	{
+//		curImage--;
+//		if(nextImage == 0)
+//			nextImage++;
+//		else
+//			nextImage--;
+//	}	
 
-	se->tileIdx = curImage * 128;
+//	se->tileIdx = curImage * 128;
 
 }
 
@@ -42,7 +42,7 @@ void CMarioWalk::load() {
 	dmaCopy(mario_idlePalette, SPRITE_PALETTE, mario_idlePaletteLength);
 	
 	// Load the sprite binary data into the VRAM
-	dmaCopy(mario_idleBitmap, SPRITE_GFX, mario_idleBitmapLength);
+//	dmaCopy(mario_idleBitmap, SPRITE_GFX, mario_idleBitmapLength);
 
 }
 

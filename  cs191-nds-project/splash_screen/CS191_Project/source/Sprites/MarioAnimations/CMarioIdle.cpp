@@ -15,10 +15,21 @@ CMarioIdle::~CMarioIdle()
 }
 
 
-void CMarioIdle::update(SpriteEntry *se) {
+void CMarioIdle::update(u16 index) {
 	
-	se->tileIdx = curImage * 128;
-		
+//	se->tileIdx = 0;//curImage * 128;
+
+    /* Copy the sprite graphics to sprite graphics memory */
+
+    //dmaCopyHalfWords(	SPRITE_DMA_CHANNEL,
+	dmaCopy(	(void*)&mario_idleBitmap[curImage * IMAGE_SIZE_64x64H],
+    			(void*)&SPRITE_GFX[index * OFFSET_MULTIPLIER],
+    			IMAGE_SIZE_64x64);//mario_idleBitmapLength);
+
+//	dmaCopy(mario_runBitmap, SPRITE_GFX, mario_runBitmapLength);
+
+	
+	
 	if(nextImage > curImage)	//increasing
 	{
 		curImage++;
@@ -38,25 +49,20 @@ void CMarioIdle::update(SpriteEntry *se) {
 	
 }
 
-void CMarioIdle::load(u16 oamID, u16 tileIdx) {
+void CMarioIdle::load() {
 //void CMarioIdle::load() {
 
 	nextImage = 1;
 	curImage = 0;
 
-    dmaCopyHalfWords(	SPRITE_DMA_CHANNEL,
-    					mario_idlePalette,
-    					&SPRITE_PALETTE[oamId * COLORS_PER_PALETTE],
-    					mario_idlePaletteLength);
-
-    /* Copy the sprite graphics to sprite graphics memory */
-
-    dmaCopyHalfWords(	SPRITE_DMA_CHANNEL,
-    					mario_idleBitmap,
-    					&SPRITE_GFX[tileIdx * OFFSET_MULTIPLIER],
-    					mario_idleBitmapLength);
+	dmaCopy(mario_idlePalette, SPRITE_PALETTE, mario_idlePaletteLength);
 	
-	return tileIdx + mario_idleBitmapLength / BYTES_PER_16_COLOR_TILE;
+//    dmaCopyHalfWords(	SPRITE_DMA_CHANNEL,
+//    					mario_idlePalette,
+//    					&SPRITE_PALETTE[0 * COLORS_PER_PALETTE],
+//    					mario_idlePaletteLength);
+	
+//	return tileIdx + mario_idleBitmapLength / BYTES_PER_16_COLOR_TILE;
 
     
     // Load the sprite palette.

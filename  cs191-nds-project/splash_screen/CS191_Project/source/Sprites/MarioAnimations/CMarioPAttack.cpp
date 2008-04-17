@@ -14,9 +14,29 @@ CMarioPAttack::~CMarioPAttack()
 {
 }
 
-void CMarioPAttack::update(SpriteEntry *se) {
+void CMarioPAttack::update(u16 index) {
 
-	se->tileIdx = curImage * 128;	
+//	se->tileIdx = curImage * 128;	
+	switch(attack)
+	{
+		case 0:
+				dmaCopy(	(void*)&mario_pattack1Bitmap[curImage * IMAGE_SIZE_64x64H],
+							(void*)&SPRITE_GFX[index * OFFSET_MULTIPLIER],
+									IMAGE_SIZE_64x64);
+				break;
+		case 1:
+				dmaCopy(	(void*)&mario_pattack2Bitmap[curImage * IMAGE_SIZE_64x64H],
+							(void*)&SPRITE_GFX[index * OFFSET_MULTIPLIER],
+									IMAGE_SIZE_64x64);
+				break;
+		case 2:
+				dmaCopy(	(void*)&mario_pattack3Bitmap[curImage * IMAGE_SIZE_64x64H],
+							(void*)&SPRITE_GFX[index * OFFSET_MULTIPLIER],
+									IMAGE_SIZE_64x64);
+				break;
+		default:
+			assert(false);
+	};
 	
 	//animation is always increasing (i.e. its a one-way animation)	
 	if( curImage < (numImages-1) )
@@ -69,7 +89,7 @@ void CMarioPAttack::loadA() {
 	dmaCopy(mario_pattack1Palette, SPRITE_PALETTE, mario_pattack1PaletteLength);
 	
 	// Load the sprite binary data into the VRAM
-	dmaCopy(mario_pattack1Bitmap, SPRITE_GFX, mario_pattack1BitmapLength);
+//	dmaCopy(mario_pattack1Bitmap, SPRITE_GFX, mario_pattack1BitmapLength);
 }
 
 void CMarioPAttack::loadB() {
@@ -84,7 +104,7 @@ void CMarioPAttack::loadB() {
 	dmaCopy(mario_pattack2Palette, SPRITE_PALETTE, mario_pattack2PaletteLength);
 	
 	// Load the sprite binary data into the VRAM
-	dmaCopy(mario_pattack2Bitmap, SPRITE_GFX, mario_pattack2BitmapLength);
+//	dmaCopy(mario_pattack2Bitmap, SPRITE_GFX, mario_pattack2BitmapLength);
 }
 
 void CMarioPAttack::loadC() {
@@ -100,7 +120,7 @@ void CMarioPAttack::loadC() {
 	dmaCopy(mario_pattack3Palette, SPRITE_PALETTE, mario_pattack3PaletteLength);
 	
 	// Load the sprite binary data into the VRAM
-	dmaCopy(mario_pattack3Bitmap, SPRITE_GFX, mario_pattack3BitmapLength);
+//	dmaCopy(mario_pattack3Bitmap, SPRITE_GFX, mario_pattack3BitmapLength);
 }
 
 

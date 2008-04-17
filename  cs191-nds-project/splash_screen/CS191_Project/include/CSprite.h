@@ -16,6 +16,7 @@ static const int BOUNDARY_VALUE = 32; /* This is the default boundary value
 static const int OFFSET_MULTIPLIER = BOUNDARY_VALUE /
                                          sizeof(SPRITE_GFX[0]);
 
+static const int SPRITE_DMA_CHANNEL = 3;
 
 
 class CSprite
@@ -38,8 +39,8 @@ public:
 
 	
 	// Handle sprite variable code here (getters/setters)
-	u8 getIndex(){ return index; }
-	void setIndex( int index ){ this->index = index; }
+//	u8 getIndex(){ return index; }
+//	void setIndex( int index ){ this->index = index; }
 	void setTileIndex(int index){ spriteEntry->tileIdx = index; }
 	void setSpriteEntry(SpriteEntry *se) { spriteEntry = se; }
 	bool isSpriteHidden(){return spriteEntry->isHidden;}
@@ -78,20 +79,24 @@ public:
 	
 protected:
 	bool locked;
-	u8 index;
+	u32 tileIndex;
+
+//	u8 index;
+	
 	u8 rotIndex;
 	bool affine;				//the image is affected by affine matrices
 	bool doubleBound;			//used to increase the boundry limit of the image (if the rotation becomes clipped)
 	bool isAnimated;
 	bool isLookingRight;				//used to keep track of which way the sprite is facing (true for right, false for left)
-	
+
+	float xVelocity;
+	float yVelocity;
 	float posX;
 	float posY;
 	
-	float xVelocity;
-	float yVelocity;
 	float angularVelocity;
 	float angle;				// in radians
+	
 	u16 spriteSize;
 	
 	SpriteEntry *spriteEntry;
