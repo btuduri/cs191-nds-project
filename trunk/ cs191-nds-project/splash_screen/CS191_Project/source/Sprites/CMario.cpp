@@ -23,19 +23,14 @@ void CMario::initSprite() {
 	
 	// Default the animation lock to false
 	locked = false;
+	isJumping = false;
 	isAnimated = true;
 	isLookingRight = true;
-//	curAnimation = &aniPAttack;
 	curAnimation = &aniIdle;
 	angle = 0;
 
 	curAnimation->load();
-//	curAnimation->load();
-//	curAnimation->load();
-
-//	xoffset = 0;
-//	yoffset = 0;
-
+	
 }
 
 void CMario::update() {
@@ -46,9 +41,19 @@ void CMario::update() {
 }
 
 void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 keys_held ) {
-	// A toggles freezing the system state.
-//	if( curAnimation->isLocked() )
-//		return;		//don't do anything
+	
+	if(keys_up & KEY_DOWN && !isJumping )
+	{
+		if( curAnimation != &aniCrouch )
+			assert(false);
+		curAnimation->forceUnlock();
+		curAnimation->update(tileIndex);
+		return;
+	}
+	
+	// All animations below require the animation to be UNLOCKED before they can run...
+	if( curAnimation->isLocked() )
+		return;		//don't do anything
 
 	//TODO: fix error where if you press something while running, it doesnt return to idle after releasing the run button..
 	
@@ -62,37 +67,86 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 		}
 		return;
 	}
-
-	if( /*key_pressed &&*/ (keys_up & KEY_A) )
+	
+//UP
+	if( keys_held & KEY_UP )
+	{
+		if( keys_up & KEY_A )
+		{
+			//TODO: write this
+		}
+		else if( keys_up & KEY_B )
+		{
+			//TODO: write this
+		}
+		//TODO: add others here...
+		else {
+			//jump
+		}
+		return;
+	}
+	
+//DOWN
+	if( keys_held & KEY_DOWN )
+	{
+		if( keys_up & KEY_A )
+		{
+			//TODO: write this
+		}
+		else if( keys_up & KEY_B )
+		{
+			//TODO: write this
+		}
+		//TODO: add others here...
+		else {		//crouch
+			if( curAnimation != &aniCrouch )
+			{
+				curAnimation = &aniCrouch;
+				curAnimation->load();
+				curAnimation->update(tileIndex);
+			}
+			return;
+		}
+		return;
+	}
+	
+//Key A
+	if( keys_up & KEY_A )
 	{
 		if( (curAnimation != &aniPAttack) )
 			curAnimation = &aniPAttack;
 		curAnimation->load();
 		curAnimation->update(tileIndex);
-	}
-
-	if(keys_up & KEY_A)
-	{
+		return;
 	}
 	
-	if(keys_up & KEY_X)
-	{
-	}
-	
-	// B make the system stop on collisions.
+// Key B	
 	if(keys_up & KEY_B)
 	{
-//	iprintf("\x1b[7;6HTrap Collisions: test...");
+		//TODO: write this
+		return;
+	}
+
+//Key X
+	if(keys_up & KEY_X)
+	{
+		//TODO: write this
+		return;
 	}
 	
+//Key L
 	if(keys_up & KEY_L)
 	{
+		//TODO: write this
+		return;
 	}
 	
+//Key R
 	if(keys_up & KEY_R)
 	{		
-	}
-	
+		//TODO: write this
+		return;
+	}	
 	
 	if( !(curAnimation->isLocked()) )
 	{
@@ -108,6 +162,7 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 				curAnimation->update(tileIndex);
 			}
 			posX -= 3;
+			return;
 		}
 		
 		if(keys_held & KEY_RIGHT)
@@ -123,15 +178,7 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 			}
 			//update position?
 			posX += 3;
-	//		curAnimation->update(spriteEntry);
-		}
-		
-		if(keys_held & KEY_DOWN)
-		{
-			if( curAnimation != &aniCrouch )
-				curAnimation = &aniCrouch;
-			curAnimation->load();
-			curAnimation->update(tileIndex);
+			return;
 		}
 	}
 }
