@@ -10,7 +10,7 @@ public:
 	CMarioCrouch();
 	virtual ~CMarioCrouch();
 
-	void update(SpriteEntry *se);
+	void update(u16 index);
 	void load();
 	
 	void setIsCrouching(bool crouch) { isCrouching = crouch; }

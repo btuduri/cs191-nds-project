@@ -67,7 +67,7 @@ void CSpriteManager::registerSprite(CSprite *sprite, bool isRotatable, s16 rotat
 	
 	// Set up the sprite and give it an index within the oam
 	index = getNextSpriteIndex();
-	sprite->setIndex( index );
+//	sprite->setIndex( index );
 	sprite->setSpriteEntry(&oam.spriteBuffer[index]);
 	sprite->initSprite();
 	
@@ -149,9 +149,9 @@ int CSpriteManager::getNextRotationIndex() {
 
 void CSpriteManager::destorySprite( CSprite *sprite )
 {
-	int index = sprite->getIndex();
-	unregisterSprite( index );
-	clearSprite(index);
+//	int index = sprite->getIndex();
+//	unregisterSprite( index );
+//	clearSprite(index);
 	clearMatrix(sprite->getRotIndex());
 	delete sprite;
 }

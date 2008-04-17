@@ -18,6 +18,7 @@ void CMario::initSprite() {
 	spriteEntry->isRotoscale = false;//true;
 	spriteEntry->isHidden = false;
 	setPosition(10, 120);
+		
     //spriteEntry->hFlip = true;
 	
 	// Default the animation lock to false
@@ -41,7 +42,7 @@ void CMario::update() {
 	spriteEntry->posX =  (u16)(posX + curAnimation->getXOffset());
 	spriteEntry->posY = (u16)(posY + curAnimation->getYOffset());
 
-	curAnimation->update(spriteEntry);
+	curAnimation->update(tileIndex);
 }
 
 void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 keys_held ) {
@@ -57,7 +58,7 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 		{
 			curAnimation = &aniIdle;
 			curAnimation->load();
-			curAnimation->update(spriteEntry);
+			curAnimation->update(tileIndex);
 		}
 		return;
 	}
@@ -67,7 +68,7 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 		if( (curAnimation != &aniPAttack) )
 			curAnimation = &aniPAttack;
 		curAnimation->load();
-		curAnimation->update(spriteEntry);
+		curAnimation->update(tileIndex);
 	}
 
 	if(keys_up & KEY_A)
@@ -104,6 +105,7 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 			{
 				curAnimation = &aniRun;
 				curAnimation->load();
+				curAnimation->update(tileIndex);
 			}
 			posX -= 3;
 		}
@@ -117,10 +119,19 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 			{
 				curAnimation = &aniRun;
 				curAnimation->load();
+				curAnimation->update(tileIndex);
 			}
 			//update position?
 			posX += 3;
 	//		curAnimation->update(spriteEntry);
+		}
+		
+		if(keys_held & KEY_DOWN)
+		{
+			if( curAnimation != &aniCrouch )
+				curAnimation = &aniCrouch;
+			curAnimation->load();
+			curAnimation->update(tileIndex);
 		}
 	}
 }

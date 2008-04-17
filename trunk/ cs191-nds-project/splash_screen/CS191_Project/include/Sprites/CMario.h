@@ -30,7 +30,7 @@ public:
 	
 	
 private:
-	bool locked;
+	
 	CAnimation * curAnimation;
 	
 	CMarioCrouch aniCrouch;

@@ -10,7 +10,7 @@ public:
 	CMarioIdle();
 	virtual ~CMarioIdle();
 	
-	void update(SpriteEntry *se);
+	void update(u16 index);
 	void load();
 	
 private:
