@@ -1,5 +1,5 @@
 
-#include "CSprite.h"
+#include "ProjectLib.h"
 
 CSprite::CSprite( SpriteEntry * se )
 {
@@ -7,27 +7,11 @@ CSprite::CSprite( SpriteEntry * se )
 	isAnimated = false;
 	angle = 0;
 	rotIndex = 0;
-	xVelocity = 0;
-	yVelocity = 0;
 	angularVelocity = 0;
 }
 
 CSprite::~CSprite()
 {
-}
-
-void CSprite::rotateSprite() {
-	
-	u16 angle = getAngleDeg512();
-	
-    s16 s = SIN[angle & SPRITE_ANGLE_MASK] >> 4;
-    s16 c = COS[angle & SPRITE_ANGLE_MASK] >> 4;
-    
-    spriteRotation->hdx = c;
-    spriteRotation->hdy = s;
-    spriteRotation->vdx = -s;
-    spriteRotation->vdy = c;
-       
 }
 
 void CSprite::setSpriteVisibility(bool hidden) {
@@ -70,10 +54,13 @@ void CSprite::setSpriteVisibility(bool hidden) {
 }
 
 void CSprite::setPosition(float x, float y) {
-	posX = x;
-	posY = y;
+
+	setX(x);
+	setY(y);
+	
 	spriteEntry->posX = (u16)x;
 	spriteEntry->posY = (u16)y;	
+//	setPosition(x, y);
 }
 
 
@@ -89,19 +76,4 @@ void CSprite::toggleFacingDirection() {
 void CSprite::setFacingDirection(bool isRight) {
 	isLookingRight = isRight;
 	spriteEntry->hFlip = (isLookingRight) ? false : true ;
-}
-
-void CSprite::updatePosition() {
-	float x = posX + xVelocity;
-	float y = posY + yVelocity;
-	
-	setPosition(x, y);
-}
-
-void CSprite::updateAngle() {
-	
-	angle += angularVelocity;
-	
-	rotateSprite();
-	
 }

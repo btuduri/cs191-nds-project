@@ -12,8 +12,8 @@ public:
 	CMarioWalk();
 	virtual ~CMarioWalk();
 	
-	void update(u16 index);
-	void load();
+	void update(SpriteEntry *se);
+	void load(SpriteEntry *se);
 	
 private:
 	u16 nextImage;

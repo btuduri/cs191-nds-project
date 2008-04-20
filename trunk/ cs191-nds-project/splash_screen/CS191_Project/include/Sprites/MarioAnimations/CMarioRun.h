@@ -10,11 +10,10 @@ public:
 	CMarioRun();
 	virtual ~CMarioRun();
 
-	void update(u16 index);
-	void load();
+	void update(SpriteEntry *se);
+	void load(SpriteEntry *se);
 	
 private:
-//	u16 nextImage;
 	u16 curImage;
 };
 

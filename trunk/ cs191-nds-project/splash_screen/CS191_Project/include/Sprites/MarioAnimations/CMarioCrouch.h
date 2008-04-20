@@ -10,13 +10,13 @@ public:
 	CMarioCrouch();
 	virtual ~CMarioCrouch();
 
-	void update(u16 index);
-	void load();
+	void update(SpriteEntry *se);
+	void load(SpriteEntry *se);
 	//overloaded
 	void forceUnlock();
 	
 	void setIsCrouching(bool crouch) { isCrouching = crouch; }
-	
+		
 private:
 	bool isCrouching;
 	u16 curImage;

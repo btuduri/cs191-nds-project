@@ -6,9 +6,9 @@
 #include "graphics/projects/rotate_screen.h"
 //#include "../gfx/projects/sprite_rotation.h"
 
-CSprite *sprite1;
-CSprite *sprite2;
-CSprite *sprite3;
+CMovableSprite *sprite1;
+CMovableSprite *sprite2;
+CMovableSprite *sprite3;
 
 u16* screen_buffer;
 u8 rotSelection;

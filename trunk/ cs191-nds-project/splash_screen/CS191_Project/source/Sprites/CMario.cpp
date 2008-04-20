@@ -14,62 +14,77 @@ void CMario::initSprite() {
 	spriteEntry->objSize = OBJSIZE_64;
 	spriteEntry->objPriority = OBJPRIORITY_0;	
 	spriteEntry->rsMatrixIdx = ATTR1_ROTDATA(0);
-	spriteEntry->tileIdx = 0;	
+	spriteEntry->tileIdx = 0;
 	spriteEntry->isRotoscale = false;//true;
 	spriteEntry->isHidden = false;
+	
 	setPosition(10, 120);
-		
+
     //spriteEntry->hFlip = true;
 	
 	// Default the animation lock to false
 	locked = false;
-	isJumping = false;
+	inAir = false;
 	isAnimated = true;
 	isLookingRight = true;
 	curAnimation = &aniIdle;
 	angle = 0;
 
-	curAnimation->load();
+	curAnimation->load(spriteEntry);
 	
 }
 
 void CMario::update() {
-	spriteEntry->posX =  (u16)(posX + curAnimation->getXOffset());
-	spriteEntry->posY = (u16)(posY + curAnimation->getYOffset());
+//	spriteEntry->posX =  (u16)(posX + curAnimation->getXOffset());
+//	spriteEntry->posY = (u16)(posY + curAnimation->getYOffset());
 
-	curAnimation->update(tileIndex);
+	if( inAir )
+	{
+//		gravity();
+	}
+		
+	curAnimation->update(spriteEntry);
+
+	updatePosition(curAnimation->getXOffset(), curAnimation->getYOffset());
+
 }
 
 void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 keys_held ) {
 	
-	if(keys_up & KEY_DOWN && !isJumping )
-	{
-		if( curAnimation != &aniCrouch )
-			assert(false);
-		curAnimation->forceUnlock();
-		curAnimation->update(tileIndex);
-		return;
-	}
+//	if( inAir && !(keys_held & KEY_UP) )
+//	{
+//		posY -= 3;
+//		if( posY > SCREEN_WIDTH/3)
+//			inAir = false;
+//	}
+		
+//	if(keys_up & KEY_DOWN && !inAir )
+//	{
+//		if( curAnimation != &aniCrouch )
+//			assert(false);
+////		curAnimation->forceUnlock();
+//		return;
+//	}
 	
 	// All animations below require the animation to be UNLOCKED before they can run...
-	if( curAnimation->isLocked() )
-		return;		//don't do anything
+//	if( curAnimation->isLocked() )
+//		return;		//don't do anything
 
 	//TODO: fix error where if you press something while running, it doesnt return to idle after releasing the run button..
 	
-	if( !key_pressed && !(curAnimation->isLocked()) )
+	if( !key_pressed && !curAnimation->isLocked())
 	{
 		if( curAnimation != &aniIdle )
 		{
 			curAnimation = &aniIdle;
-			curAnimation->load();
-			curAnimation->update(tileIndex);
+			curAnimation->load(spriteEntry);
+			update();
 		}
-		return;
+//		return;
 	}
 	
 //UP
-	if( keys_held & KEY_UP )
+	if( (keys_held & KEY_UP) || (keys_down & KEY_UP) )
 	{
 		if( keys_up & KEY_A )
 		{
@@ -82,90 +97,115 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 		//TODO: add others here...
 		else {
 			//jump
+			if( curAnimation != &aniJump )
+			{
+				inAir = true;
+				curAnimation = &aniJump;
+				curAnimation->load(spriteEntry);
+				setYVelocity(-JUMP_VELOCITY);
+				update();
+			}
+//			errColor.green();
+//			Error();
 		}
-		return;
+//		return;
 	}
 	
 //DOWN
-	if( keys_held & KEY_DOWN )
+
+	if( ((keys_down & KEY_DOWN) || (keys_held & KEY_DOWN)) &&  (keys_up & KEY_A) )
 	{
-		if( keys_up & KEY_A )
-		{
-			//TODO: write this
-		}
-		else if( keys_up & KEY_B )
-		{
-			//TODO: write this
-		}
-		//TODO: add others here...
-		else {		//crouch
-			if( curAnimation != &aniCrouch )
-			{
-				curAnimation = &aniCrouch;
-				curAnimation->load();
-				curAnimation->update(tileIndex);
-			}
-			return;
-		}
-		return;
+		errColor.cyan();
+		Error();
+		//TODO: write this
 	}
 	
+	if( ((keys_down & KEY_DOWN) || (keys_held & KEY_DOWN)) &&  (keys_up & KEY_B) )
+	{
+		errColor.blue();
+		Error();
+		//TODO: write this
+	}
+	//TODO: add others here...
+	
+	//crouch
+	if( (keys_down & KEY_DOWN) || (keys_up & KEY_DOWN) )
+	{
+		if( curAnimation != &aniCrouch )
+		{
+			curAnimation = &aniCrouch;
+			setXVelocity(0);
+		}
+		curAnimation->load(spriteEntry);
+		//		return;
+	}
+		
 //Key A
 	if( keys_up & KEY_A )
 	{
 		if( (curAnimation != &aniPAttack) )
+		{
 			curAnimation = &aniPAttack;
-		curAnimation->load();
-		curAnimation->update(tileIndex);
-		return;
+			update();
+		}
+		curAnimation->load(spriteEntry);
+//		return;
 	}
 	
 // Key B	
 	if(keys_up & KEY_B)
 	{
 		//TODO: write this
-		return;
+//		return;
 	}
 
 //Key X
 	if(keys_up & KEY_X)
 	{
 		//TODO: write this
-		return;
+//		return;
 	}
 	
 //Key L
 	if(keys_up & KEY_L)
 	{
 		//TODO: write this
-		return;
+//		return;
 	}
 	
 //Key R
 	if(keys_up & KEY_R)
 	{		
 		//TODO: write this
-		return;
+//		return;
 	}	
 	
 	if( !(curAnimation->isLocked()) )
 	{
-		if(keys_held & KEY_LEFT)
+		if( (keys_down & KEY_LEFT) || (keys_held & KEY_LEFT) )
 		{
-			if(getFacingDirection()!=FACING_LEFT)
+			if(getFacingDirection()!= FACING_LEFT)
 				setFacingDirection(FACING_LEFT);
 			
 			if( (curAnimation != &aniRun) )
 			{
 				curAnimation = &aniRun;
-				curAnimation->load();
-				curAnimation->update(tileIndex);
+				curAnimation->load(spriteEntry);
+				update();
 			}
-			posX -= 3;
-			return;
+			setXVelocity(-RUN_VELOCITY);
+
+//			errColor.yellow();
+//			Error();
+//			return;
 		}
 		
-		if(keys_held & KEY_RIGHT)
+		if( keys_up & KEY_LEFT  &&  !(keys_held & KEY_RIGHT) )
+		{
+			setXVelocity(0);
+		}
+		
+		if( (keys_down & KEY_RIGHT)  || (keys_held & KEY_RIGHT) )
 		{
 			if(getFacingDirection()!=FACING_RIGHT)
 				setFacingDirection(FACING_RIGHT);
@@ -173,13 +213,20 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 			if( (curAnimation != &aniRun) )
 			{
 				curAnimation = &aniRun;
-				curAnimation->load();
-				curAnimation->update(tileIndex);
+				curAnimation->load(spriteEntry);
+				update();
 			}
-			//update position?
-			posX += 3;
+			setXVelocity(RUN_VELOCITY);
+//			errColor.cyan();
+//			Error();
 			return;
 		}
+		
+		if( keys_up & KEY_RIGHT   &&  !(keys_held & KEY_LEFT) )
+		{
+			setXVelocity(0);
+		}
+
 	}
 }
 

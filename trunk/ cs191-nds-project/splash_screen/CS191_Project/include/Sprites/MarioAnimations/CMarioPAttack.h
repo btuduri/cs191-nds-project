@@ -15,9 +15,9 @@ public:
 	CMarioPAttack();
 	virtual ~CMarioPAttack();
 
-	void update(u16 index);
-	void load();
-		
+	void update(SpriteEntry *se);
+	void load(SpriteEntry *se);
+			
 private:
 	void loadA();		// first punch
 	void loadB();		// second punch
@@ -31,7 +31,7 @@ private:
 		attack2,
 		attack3
 	};*/
-	
+	u16 tileIdx;
 	u8 attack;		// 0, 1, or 2
 	u8 numAttacks;
 	

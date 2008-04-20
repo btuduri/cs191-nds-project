@@ -7,7 +7,7 @@
 
 #include "graphics/projects/sprite_rotation.h"
 
-class CSpriteRotations : public CSprite
+class CSpriteRotations : public CMovableSprite
 {
 public:
 	virtual ~CSpriteRotations();
