@@ -97,7 +97,7 @@ void CSpriteManager::registerSprite(CSprite *sprite, bool isRotatable, s16 rotat
 			sprite->setSpriteRotation(&oam.matrixBuffer[rotIndex]);
 		}
 	}
-	
+		
 	sprites[index] = sprite;
 	numSprites++;
 

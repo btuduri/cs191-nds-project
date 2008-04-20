@@ -5,7 +5,7 @@ CMarioCrouch::CMarioCrouch()
 	xoffset = 0;
 	yoffset = 0;
 	curImage = 0;
-	numImages = 4;
+	numImages = 2;
 	locked = false;
 	imageSize = 32;
 }
@@ -14,50 +14,46 @@ CMarioCrouch::~CMarioCrouch()
 {
 }
 
-void CMarioCrouch::update(u16 index) {
+void CMarioCrouch::update(SpriteEntry *se) {
 
-	dmaCopy(	(void*)&mario_crouchBitmap[curImage * IMAGE_SIZE_64x64H],
-    			(void*)&SPRITE_GFX[index * OFFSET_MULTIPLIER],
-    			IMAGE_SIZE_64x64);//mario_idleBitmapLength);
+	dmaCopy(	(void*)&mario_crouchBitmap[curImage * IMAGE_SIZE_32x32H],
+    			(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
+    			IMAGE_SIZE_32x32);
 
-//	if(isCrouching)	//crouching
-//	{
+	if(isCrouching)	//crouching
+	{
 		if( curImage < (numImages - 1) )
 		{
 			curImage++;
 		}
-		else
-		{
-//			isCrouching = true;
-			locked = false;
-		}
 	}
-//	else				//coming up
-//	{
-//		if( curImage > 0 )
-//		{
-//			curImage--;
-//		}
-//		else locked = false;
-//	}	
+	else
+	{
+		if( curImage > 0 )
+		{
+			curImage--;
+		}
+		else locked = false;
+	}	
 
 }
 
-void CMarioCrouch::load() {
+void CMarioCrouch::load(SpriteEntry *se) {
 
-	locked = true;
-	curImage = 0;
-	isCrouching = true;
+	if( isCrouching )
+	{
+		isCrouching = false;
+		// the animation should still be locked at this point
+	}
+	else {
+		se->objSize = OBJSIZE_32;
+		locked = true;
+		curImage = 0;
+		isCrouching = true;
+
+		// Load the sprite palette.
+		dmaCopy(mario_crouchPalette, &SPRITE_PALETTE[se->tileIdx * MAX_PALETTE_SIZE], mario_crouchPaletteLength);
+	}
 	
-	// Load the sprite palette.
-	dmaCopy(mario_crouchPalette, SPRITE_PALETTE, mario_crouchPaletteLength);
-	
-	// Load the sprite binary data into the VRAM
-//	dmaCopy(mario_crouchBitmap, SPRITE_GFX, mario_crouchBitmapLength);
-
+	update(se);
 }
-
-void CMarioCrouch::forceUnlock() {
-	setIsCrouching(false);
-}
-

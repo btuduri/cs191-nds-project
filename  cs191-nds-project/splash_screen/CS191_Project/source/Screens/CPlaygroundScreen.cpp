@@ -3,8 +3,8 @@
 #include "CMario.h"
 
 CSpriteManager *csm;
-CSprite *player1;
-CSprite *player2;
+CMovableSprite *player1;
+CMovableSprite *player2;
 
 void player1Update()
 {
@@ -107,13 +107,12 @@ int CPlaygroundScreen::run()
 	
 	CSpriteManager *sm = new CSpriteManager();
 	csm = sm;
-	
-	
+
 	//assert(false);
 	CMario * mario = new CMario();
 	sm->registerSprite(mario);
 	player1 = mario;
-	
+
 //	CMario * mario1 = new CMario();
 //	sm->registerSprite(mario1);
 //	player2 = mario1;

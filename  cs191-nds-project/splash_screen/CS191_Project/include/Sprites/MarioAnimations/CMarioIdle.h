@@ -10,8 +10,8 @@ public:
 	CMarioIdle();
 	virtual ~CMarioIdle();
 	
-	void update(u16 index);
-	void load();
+	void update(SpriteEntry *se);
+	void load(SpriteEntry *se);
 	
 private:
 	u16 nextImage;

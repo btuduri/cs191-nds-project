@@ -1,0 +1,41 @@
+#ifndef CPHYSICS_H_
+#define CPHYSICS_H_
+
+#include "ProjectLib.h"
+
+//definitions
+#define GRAVITY	.2//9.8/SCREEN_HEIGHT
+
+class CPhysics {
+
+public:
+
+	float getXVelocity(){return cVelocity.vx;}
+	void setXVelocity(float vx){cVelocity.vx = vx;}
+	void toggleXVelocity(){cVelocity.vx = -cVelocity.vx;}
+//	float getXAcceleration(){return xAcceleration;}
+//	void setXAcceleration(float ax){xAcceleration = ax;}
+
+	float getYVelocity(){return cVelocity.vy;}
+	void setYVelocity(float vy){cVelocity.vy = vy;}
+	void toggleYVelocity(){cVelocity.vy = -cVelocity.vy;}	
+//	float getYAcceleration(){return yAcceleration;}
+//	void setYAcceleration(float ay){yAcceleration = ay;}
+
+	void setVelocity( float vx, float vy ) { cVelocity.vx = vx; cVelocity.vy = vy; }
+	
+	bool gravity();
+	
+protected:
+	
+	typedef struct velocity{
+		float vx;
+		float vy;
+	} Velocity;
+	
+	Velocity cVelocity;
+
+};
+
+
+#endif /*CPHYSICS_H_*/

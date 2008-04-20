@@ -2,9 +2,9 @@
 
 CMarioPAttack::CMarioPAttack()
 {
-	xoffset = 0;
-	yoffset = 0;
-	imageSize = 32;
+	xoffset = 16;
+	yoffset = 16;
+	imageSize = 64;
 	attack = 0;
 	numAttacks = 0;
 	locked = false;
@@ -14,24 +14,24 @@ CMarioPAttack::~CMarioPAttack()
 {
 }
 
-void CMarioPAttack::update(u16 index) {
+void CMarioPAttack::update(SpriteEntry *se) {
 
 //	se->tileIdx = curImage * 128;	
 	switch(attack)
 	{
 		case 0:
 				dmaCopy(	(void*)&mario_pattack1Bitmap[curImage * IMAGE_SIZE_64x64H],
-							(void*)&SPRITE_GFX[index * OFFSET_MULTIPLIER],
+							(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
 									IMAGE_SIZE_64x64);
 				break;
 		case 1:
 				dmaCopy(	(void*)&mario_pattack2Bitmap[curImage * IMAGE_SIZE_64x64H],
-							(void*)&SPRITE_GFX[index * OFFSET_MULTIPLIER],
+							(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
 									IMAGE_SIZE_64x64);
 				break;
 		case 2:
 				dmaCopy(	(void*)&mario_pattack3Bitmap[curImage * IMAGE_SIZE_64x64H],
-							(void*)&SPRITE_GFX[index * OFFSET_MULTIPLIER],
+							(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
 									IMAGE_SIZE_64x64);
 				break;
 		default:
@@ -54,8 +54,8 @@ void CMarioPAttack::update(u16 index) {
 			switch(attack)
 			{
 //				case 0: loadA(); errColor.cyan(); Error(); break;
-				case 1: loadB(); break;
-				case 2: loadC(); break;
+				case 1: loadB(); update(se); break;
+				case 2: loadC(); update(se); break;
 //				default: loadA(); errColor.magenta(); Error();	//this shouldn't happen
 			}
 		}
@@ -65,9 +65,14 @@ void CMarioPAttack::update(u16 index) {
 	}
 }
 
-void CMarioPAttack::load() {
+void CMarioPAttack::load(SpriteEntry *se) {
 	if( !locked )
+	{
+		tileIdx = se->tileIdx;
+		se->objSize = OBJSIZE_64;
 		loadA();
+		update(se);
+	}
 	
 	if( (numAttacks < MAX_ATTACKS) && (attack < (MAX_ATTACKS-1)) )
 	{
@@ -76,51 +81,42 @@ void CMarioPAttack::load() {
 	
 }
 
+// punch attack
 void CMarioPAttack::loadA() {
-//	nextImage = 1;
+	locked = true;
 	curImage = 0;
 	numImages = 6;
-//	nextAttack = false;
-	locked = true;
 	attack = 0;
-	xoffset = 0;
+	xoffset = 16;
 	
 	// Load the sprite palette.
-	dmaCopy(mario_pattack1Palette, SPRITE_PALETTE, mario_pattack1PaletteLength);
+	dmaCopy(mario_pattack1Palette, &SPRITE_PALETTE[tileIdx * MAX_PALETTE_SIZE], mario_pattack1PaletteLength);
 	
-	// Load the sprite binary data into the VRAM
-//	dmaCopy(mario_pattack1Bitmap, SPRITE_GFX, mario_pattack1BitmapLength);
 }
 
+// second punch attack
 void CMarioPAttack::loadB() {
-//	nextImage = 1;
 	curImage = 0;
 	numImages = 6;
-//	nextAttack = false;
-	locked = true;
 	attack = 1;
 	
 	// Load the sprite palette.
-	dmaCopy(mario_pattack2Palette, SPRITE_PALETTE, mario_pattack2PaletteLength);
+	dmaCopy(mario_pattack2Palette, &SPRITE_PALETTE[tileIdx * MAX_PALETTE_SIZE], mario_pattack2PaletteLength);
 	
-	// Load the sprite binary data into the VRAM
-//	dmaCopy(mario_pattack2Bitmap, SPRITE_GFX, mario_pattack2BitmapLength);
 }
 
+// kick attack
 void CMarioPAttack::loadC() {
-//	nextImage = 1;
+
 	curImage = 0;
 	numImages = 6;
-//	nextAttack = false;
-	locked = true;
 	attack = 2;
-	xoffset = 10;
+	xoffset = 26;
 	
 	// Load the sprite palette.
-	dmaCopy(mario_pattack3Palette, SPRITE_PALETTE, mario_pattack3PaletteLength);
+	dmaCopy(mario_pattack3Palette, &SPRITE_PALETTE[tileIdx * MAX_PALETTE_SIZE], mario_pattack3PaletteLength);
+
 	
-	// Load the sprite binary data into the VRAM
-//	dmaCopy(mario_pattack3Bitmap, SPRITE_GFX, mario_pattack3BitmapLength);
 }
 
 
