@@ -6,7 +6,7 @@ CMarioCrouch::CMarioCrouch()
 	yoffset = 0;
 	curImage = 0;
 	numImages = 2;
-	locked = false;
+	animationLocked = false;
 	imageSize = 32;
 }
 
@@ -33,7 +33,7 @@ void CMarioCrouch::update(SpriteEntry *se) {
 		{
 			curImage--;
 		}
-		else locked = false;
+		else animationLocked = false;
 	}	
 
 }
@@ -47,7 +47,7 @@ void CMarioCrouch::load(SpriteEntry *se) {
 	}
 	else {
 		se->objSize = OBJSIZE_32;
-		locked = true;
+		animationLocked = true;
 		curImage = 0;
 		isCrouching = true;
 

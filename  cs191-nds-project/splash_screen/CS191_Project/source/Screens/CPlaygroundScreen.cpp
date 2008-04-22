@@ -47,14 +47,13 @@ void CPlaygroundScreen::loadVideo()
 void CPlaygroundScreen::loadBackground()
 {
 	// Main screen background
-	BG2_CR = BG_BMP16_256x256 | BG_BMP_BASE(0) | BG_PRIORITY_0;
+	BG2_CR = BG_BMP8_512x512 | BG_BMP_BASE(0) | BG_PRIORITY_0;
 	BG2_XDX = 1 << 8;
 	BG2_XDY = 0;
 	BG2_YDX = 0;
 	BG2_YDY = 1 << 8;
 	BG2_CX = 0;
 	BG2_CY = 0;
-
 	
 	videoSetModeSub(MODE_0_2D | DISPLAY_BG0_ACTIVE);
 
@@ -81,8 +80,8 @@ void CPlaygroundScreen::processInput()
 	if( keys_down | keys_up | keys_held )
 	{
 		key_pressed = true;
-		errColor.blue();
-		Error();
+//		errColor.blue();
+//		Error();
 	}
 	else key_pressed = false;
 	
@@ -90,9 +89,6 @@ void CPlaygroundScreen::processInput()
 	player1->updateAnimation( key_pressed, keys_down, keys_up, keys_held );
 	
 }
-
-
-
 
 int CPlaygroundScreen::run()
 {
@@ -131,7 +127,7 @@ int CPlaygroundScreen::run()
 //	irqSet(IRQ_TIMER3, 	player2Update);
 //	
 	// Copy the data from program memory to VRAM.
-	//dmaCopy(splashBitmap, (u16*)BG_BMP_RAM(0), splashBitmapLen);
+	dmaCopy(level01Bitmap, (u16*)BG_BMP_RAM(0), level01BitmapLen);
 
 	// Copy the data from program memory to VRAM.
 	//dmaCopy(titleBitmap, (u16*)BG_BMP_RAM_SUB(0), titleBitmapLen);

@@ -119,8 +119,8 @@ void CSpriteRotationScreen::processInput()
 	if( keys_down | keys_up | keys_held)
 	{
 		key_pressed = true;
-		errColor.blue();
-		Error();
+//		errColor.blue();
+//		Error();
 	}
 	else key_pressed = false;
 	

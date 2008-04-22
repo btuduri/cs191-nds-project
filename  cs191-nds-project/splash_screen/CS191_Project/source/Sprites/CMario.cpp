@@ -35,18 +35,18 @@ void CMario::initSprite() {
 }
 
 void CMario::update() {
-//	spriteEntry->posX =  (u16)(posX + curAnimation->getXOffset());
-//	spriteEntry->posY = (u16)(posY + curAnimation->getYOffset());
-
-	if( inAir )
-	{
-//		gravity();
-	}
-		
+	
 	curAnimation->update(spriteEntry);
 
-	updatePosition(curAnimation->getXOffset(), curAnimation->getYOffset());
+	if(curAnimation->allowedMobile()) {
+		if( inAir )
+		{
+			gravity();
+		}
 
+		updatePosition(curAnimation->getXOffset(), curAnimation->getYOffset());
+	}
+	
 }
 
 void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 keys_held ) {
@@ -72,7 +72,7 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 
 	//TODO: fix error where if you press something while running, it doesnt return to idle after releasing the run button..
 	
-	if( !key_pressed && !curAnimation->isLocked())
+	if( !key_pressed && !curAnimation->isAnimationLocked() && !inAir )
 	{
 		if( curAnimation != &aniIdle )
 		{
@@ -115,15 +115,15 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 
 	if( ((keys_down & KEY_DOWN) || (keys_held & KEY_DOWN)) &&  (keys_up & KEY_A) )
 	{
-		errColor.cyan();
-		Error();
+//		errColor.cyan();
+//		Error();
 		//TODO: write this
 	}
 	
 	if( ((keys_down & KEY_DOWN) || (keys_held & KEY_DOWN)) &&  (keys_up & KEY_B) )
 	{
-		errColor.blue();
-		Error();
+//		errColor.blue();
+//		Error();
 		//TODO: write this
 	}
 	//TODO: add others here...
@@ -180,7 +180,7 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 //		return;
 	}	
 	
-	if( !(curAnimation->isLocked()) )
+	if( !(curAnimation->isAnimationLocked()) )
 	{
 		if( (keys_down & KEY_LEFT) || (keys_held & KEY_LEFT) )
 		{
