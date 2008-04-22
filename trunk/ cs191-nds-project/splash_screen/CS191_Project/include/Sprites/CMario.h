@@ -15,7 +15,7 @@
 #include "MarioAnimations/CMarioWalk.h"
 
 //definitions
-#define JUMP_VELOCITY 6.0
+#define JUMP_VELOCITY 10.0
 #define RUN_VELOCITY 10.0
 
 
@@ -27,10 +27,6 @@ public:
 
 	void initSprite();
 	
-	bool isLocked(){ return locked; }
-	void forceLock() { locked = true; }
-	void forceUnlock() { locked = false; }
-
 	void update();
 	void updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 keys_held );
 	

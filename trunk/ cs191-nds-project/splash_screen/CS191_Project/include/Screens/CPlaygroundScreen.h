@@ -5,6 +5,8 @@
 
 #include "ProjectLib.h"
 
+#include "graphics/levels/level01.h"
+
 class CPlaygroundScreen : public CScreen
 {
 public:

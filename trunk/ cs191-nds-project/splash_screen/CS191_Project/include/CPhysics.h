@@ -4,7 +4,7 @@
 #include "ProjectLib.h"
 
 //definitions
-#define GRAVITY	.2//9.8/SCREEN_HEIGHT
+#define GRAVITY	.5//9.8/SCREEN_HEIGHT
 
 class CPhysics {
 

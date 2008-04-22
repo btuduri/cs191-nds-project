@@ -7,7 +7,7 @@ CMarioPAttack::CMarioPAttack()
 	imageSize = 64;
 	attack = 0;
 	numAttacks = 0;
-	locked = false;
+	animationLocked = false;
 }
 
 CMarioPAttack::~CMarioPAttack()
@@ -60,13 +60,13 @@ void CMarioPAttack::update(SpriteEntry *se) {
 			}
 		}
 		else { 				//otherwise, unlock the animation so a different animation can play
-			locked = false;
+			animationLocked = false;
 		}
 	}
 }
 
 void CMarioPAttack::load(SpriteEntry *se) {
-	if( !locked )
+	if( !animationLocked )
 	{
 		tileIdx = se->tileIdx;
 		se->objSize = OBJSIZE_64;
@@ -83,7 +83,7 @@ void CMarioPAttack::load(SpriteEntry *se) {
 
 // punch attack
 void CMarioPAttack::loadA() {
-	locked = true;
+	animationLocked = true;
 	curImage = 0;
 	numImages = 6;
 	attack = 0;

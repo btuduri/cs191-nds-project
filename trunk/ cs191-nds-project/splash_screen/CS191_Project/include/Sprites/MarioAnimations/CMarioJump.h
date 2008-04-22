@@ -2,6 +2,9 @@
 #define CMARIOJUMP_H_
 
 #include "ProjectLib.h"
+
+// jump animation, is basically crouch + jump
+#include "graphics/mario_crouch.h"
 #include "graphics/mario_jump.h"
 
 class CMarioJump : public CAnimation
@@ -14,7 +17,10 @@ public:
 	void load(SpriteEntry *se);
 	
 private:
-	u16 nextImage;
+	void loadJump();
+
+	bool jump;
+	SpriteEntry * se;
 	u16 curImage;
 };
 

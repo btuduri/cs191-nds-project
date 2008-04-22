@@ -20,20 +20,27 @@ public:
 	virtual void update(SpriteEntry *se)=0;
 	virtual void load(SpriteEntry *se)=0;
 	
-	bool isLocked() { return locked; }
-	void forceUnlock() { locked = false; }
-	void forceLock() { locked = true; }
+	bool isAnimationLocked(){ return animationLocked; }
+	void forceAnimationLock() { animationLocked = true; }
+	void forceAnimationUnlock() { animationLocked = false; }
+	
+	bool allowedMobile(){ return !mobilityLocked; }
+	void forceMobilityLock() { mobilityLocked = true; }
+	void forceMobilityUnlock() { mobilityLocked = false; }
+	
 	
 	u16 getXOffset(){ return xoffset; }
 	u16 getYOffset(){ return yoffset; }
 	
 protected:
-//	u16 startTitleIndex;
+
 	u16 numImages;
-	bool locked;
+	bool animationLocked;
+	bool mobilityLocked;
 	u16 xoffset;
 	u16 yoffset;
 	u16 imageSize;			// usually 32-bits
+
 };
 
 #endif /*CANIMATION_H_*/
