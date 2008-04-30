@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?>
+
+<cproject>
+<storageModule moduleId="org.eclipse.cdt.core.settings">
+<cconfiguration id="nds.managedbuilder.config.release.eabi.1026344554">
+<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="nds.managedbuilder.config.release.eabi.1026344554" moduleId="org.eclipse.cdt.core.settings" name="Release">
+<externalSettings/>
+<extensions>
+<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+<extension id="org.scarab.nds.managedbuilder.parser.NDSParser" point="org.eclipse.cdt.core.BinaryParser"/>
+<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+</extensions>
+</storageModule>
+<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+<configuration artifactExtension="nds" artifactName="CS191_Project" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="nds.managedbuilder.config.release.eabi.1026344554" name="Release" parent="nds.managedbuilder.config.release.eabi">
+<folderInfo id="nds.managedbuilder.config.release.eabi.1026344554." name="/" resourcePath="">
+<toolChain id="nds.managedbuilder.toolchain.release.eabi.147356075" name="GCC Toolchain" superClass="nds.managedbuilder.toolchain.release.eabi">
+<targetPlatform archList="all" binaryParser="org.scarab.nds.managedbuilder.parser.NDSParser;org.eclipse.cdt.core.ELF" id="nds.managedbuilder.targetplatform.release.eabi.1767055598" isAbstract="false" name="Release" osList="win32,linux" superClass="nds.managedbuilder.targetplatform.release.eabi"/>
+<builder buildPath="${workspace_loc:/CS191_Project/Release}" id="nds.managedbuilder.builder.release.eabi.337918331" managedBuildOn="true" name="GNU Make.Release" superClass="nds.managedbuilder.builder.release.eabi"/>
+<tool id="nds.managedbuilder.tool.c.compiler.release.eabi.130826683" name="GCC C Compiler" superClass="nds.managedbuilder.tool.c.compiler.release.eabi">
+<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.2083745107" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+</tool>
+<tool id="nds.managedbuilder.tool.cpp.compiler.release.eabi.1968862017" name="GCC C++ Compiler" superClass="nds.managedbuilder.tool.cpp.compiler.release.eabi">
+<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.902932469" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+</tool>
+<tool id="nds.managedbuilder.tool.c.linker.release.eabi.1785031128" name="GCC C Linker" superClass="nds.managedbuilder.tool.c.linker.release.eabi"/>
+<tool id="nds.managedbuilder.tool.cpp.linker.release.eabi.1743323797" name="GCC C++ Linker" superClass="nds.managedbuilder.tool.cpp.linker.release.eabi"/>
+<tool id="nds.managedbuilder.tool.as.release.eabi.1594847028" name="GCC Assembler" superClass="nds.managedbuilder.tool.as.release.eabi">
+<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1010795428" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+</tool>
+<tool id="nds.managedbuilder.tool.objcopy.release.eabi.268386683" name="Object Copy" superClass="nds.managedbuilder.tool.objcopy.release.eabi"/>
+<tool id="nds.managedbuilder.tool.ndstool.release.eabi.1399110628" name="NDS Tool" superClass="nds.managedbuilder.tool.ndstool.release.eabi"/>
+</toolChain>
+</folderInfo>
+</configuration>
+</storageModule>
+<storageModule moduleId="scannerConfiguration">
+<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile"/>
+<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="makefileGenerator">
+<runAction arguments="-f ${project_name}_scd.mk" command="make" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp" command="g++" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.c" command="gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp" command="g++" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.c" command="gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.scarab.nds.managedbuilder.scannerconfig.devkitARM.elf">
+<buildOutputProvider>
+<openAction enabled="false" filePath=""/>
+<parser enabled="false"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="arm-elf-gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.scarab.nds.managedbuilder.scannerconfig.devkitARM.eabi">
+<buildOutputProvider>
+<openAction enabled="false" filePath=""/>
+<parser enabled="false"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="arm-eabi-gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+</storageModule>
+<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+</cconfiguration>
+</storageModule>
+<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+<project id="CS191_Project.nds.managedbuilder.rom.eabi.1134966014" name="NDS ROM (eabi)" projectType="nds.managedbuilder.rom.eabi"/>
+</storageModule>
+</cproject>
