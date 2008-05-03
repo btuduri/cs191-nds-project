@@ -22,6 +22,33 @@
 <targetPlatform archList="all" binaryParser="org.scarab.nds.managedbuilder.parser.NDSParser;org.eclipse.cdt.core.ELF" id="nds.managedbuilder.targetplatform.release.eabi.1040098915" isAbstract="false" name="Release" osList="win32,linux" superClass="nds.managedbuilder.targetplatform.release.eabi"/>
 <builder autoBuildTarget="all" buildPath="${workspace_loc:/CS191_Project/Release}" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="nds.managedbuilder.builder.release.eabi.1180458614" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make" superClass="nds.managedbuilder.builder.release.eabi"/>
 <tool id="nds.managedbuilder.tool.c.compiler.release.eabi.1029523756" name="GCC C Compiler" superClass="nds.managedbuilder.tool.c.compiler.release.eabi">
+<option id="gnu.c.compiler.option.preprocessor.nostdinc.1510028981" superClass="gnu.c.compiler.option.preprocessor.nostdinc"/>
+<option id="gnu.c.compiler.option.preprocessor.preprocess.897026917" superClass="gnu.c.compiler.option.preprocessor.preprocess"/>
+<option id="gnu.c.compiler.option.preprocessor.def.symbols.1158816581" superClass="gnu.c.compiler.option.preprocessor.def.symbols"/>
+<option id="gnu.c.compiler.option.preprocessor.undef.symbol.1620388659" superClass="gnu.c.compiler.option.preprocessor.undef.symbol"/>
+<option id="gnu.c.compiler.option.include.paths.251768822" superClass="gnu.c.compiler.option.include.paths"/>
+<option id="gnu.c.compiler.option.optimization.level.1785062419" superClass="gnu.c.compiler.option.optimization.level"/>
+<option id="gnu.c.compiler.option.optimization.flags.804555171" superClass="gnu.c.compiler.option.optimization.flags"/>
+<option id="gnu.c.compiler.option.debugging.level.682177531" superClass="gnu.c.compiler.option.debugging.level"/>
+<option id="gnu.c.compiler.option.debugging.other.1249396581" superClass="gnu.c.compiler.option.debugging.other"/>
+<option id="gnu.c.compiler.option.debugging.gprof.183578486" superClass="gnu.c.compiler.option.debugging.gprof"/>
+<option id="gnu.c.compiler.option.debugging.prof.1714670588" superClass="gnu.c.compiler.option.debugging.prof"/>
+<option id="gnu.c.compiler.option.warnings.syntax.2108910027" superClass="gnu.c.compiler.option.warnings.syntax"/>
+<option id="gnu.c.compiler.option.warnings.pedantic.788935011" superClass="gnu.c.compiler.option.warnings.pedantic"/>
+<option id="gnu.c.compiler.option.warnings.pedantic.error.1885135430" superClass="gnu.c.compiler.option.warnings.pedantic.error"/>
+<option id="gnu.c.compiler.option.warnings.nowarn.875253726" superClass="gnu.c.compiler.option.warnings.nowarn"/>
+<option id="gnu.c.compiler.option.warnings.allwarn.1496829925" superClass="gnu.c.compiler.option.warnings.allwarn"/>
+<option id="gnu.c.compiler.option.warnings.toerrors.1698012053" superClass="gnu.c.compiler.option.warnings.toerrors"/>
+<option id="gnu.c.compiler.option.misc.other.804869656" superClass="gnu.c.compiler.option.misc.other"/>
+<option id="gnu.c.compiler.option.misc.verbose.1383029523" superClass="gnu.c.compiler.option.misc.verbose"/>
+<option id="gnu.c.compiler.option.misc.ansi.104805388" superClass="gnu.c.compiler.option.misc.ansi"/>
+<option id="nds.managedbuilder.compiler.c.option.fastmath.1370216135" superClass="nds.managedbuilder.compiler.c.option.fastmath"/>
+<option id="nds.managedbuilder.compiler.c.option.framepointer.399333597" superClass="nds.managedbuilder.compiler.c.option.framepointer"/>
+<option id="nds.managedbuilder.compiler.c.option.interwork.1885053572" superClass="nds.managedbuilder.compiler.c.option.interwork"/>
+<option id="nds.managedbuilder.compiler.c.option.iset.1772019539" superClass="nds.managedbuilder.compiler.c.option.iset"/>
+<option id="nds.managedbuilder.compiler.c.option.cpu.2067381005" superClass="nds.managedbuilder.compiler.c.option.cpu"/>
+<option id="nds.managedbuilder.compiler.c.option.tune.1931258526" superClass="nds.managedbuilder.compiler.c.option.tune"/>
+<option id="nds.managedbuilder.compiler.c.option.define.309551879" superClass="nds.managedbuilder.compiler.c.option.define"/>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1713667599" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="nds.managedbuilder.tool.cpp.compiler.release.eabi.1113279002" name="GCC C++ Compiler" superClass="nds.managedbuilder.tool.cpp.compiler.release.eabi">
@@ -29,7 +56,7 @@
 <listOptionValue builtIn="false" value="&quot;C:\devkitPro\devkitARM\include\c++\4.1.2&quot;"/>
 <listOptionValue builtIn="false" value="&quot;C:\devkitPro\libnds\include&quot;"/>
 <listOptionValue builtIn="false" value="&quot;C:\devkitPro\devkitARM\arm-eabi\include&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/graphics}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/graphics}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/Screens}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/Sprites}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/Sprites/MarioAnimations}&quot;"/>
