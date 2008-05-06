@@ -1,11 +1,13 @@
 #ifndef CMARIOJUMP_H_
 #define CMARIOJUMP_H_
+#pragma once
 
 #include "ProjectLib.h"
+#include "CAnimation.h"
 
 // jump animation, is basically crouch + jump
-#include "graphics/mario_crouch.h"
-#include "graphics/mario_jump.h"
+#include "../graphics/mario_crouch.h"
+#include "../graphics/mario_jump.h"
 
 class CMarioJump : public CAnimation
 {

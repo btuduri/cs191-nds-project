@@ -1,7 +1,9 @@
 #ifndef CANIMATION_H_
 #define CANIMATION_H_
+#pragma once
 
 #include "ProjectLib.h"
+#include "CSprite.h"
 
 #define IMAGE_SIZE_32x32 1024
 #define IMAGE_SIZE_32x32H 512	// the way images are outputted, the array size is 1/2 the size of the image
@@ -14,8 +16,8 @@
 class CAnimation
 {
 public:
-	CAnimation();
-	virtual ~CAnimation();
+	CAnimation() {};
+	virtual ~CAnimation() {}; 
 
 	virtual void update(SpriteEntry *se)=0;
 	virtual void load(SpriteEntry *se)=0;

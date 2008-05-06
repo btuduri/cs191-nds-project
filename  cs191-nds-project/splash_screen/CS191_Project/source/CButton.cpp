@@ -1,4 +1,4 @@
-#include "ProjectLib.h"
+#include "CButton.h"
 
 // basic constructor, if it is clickable Default offSets are used
 CButton::CButton(int16 x, int16 y, bool click){

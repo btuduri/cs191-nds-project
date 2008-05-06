@@ -1,11 +1,13 @@
 #ifndef CMARIOPATTACK_H_
 #define CMARIOPATTACK_H_
+#pragma once
 
 //Primary attack
 #include "ProjectLib.h"
-#include "graphics/mario_pattack1.h"
-#include "graphics/mario_pattack2.h"
-#include "graphics/mario_pattack3.h"
+#include "CAnimation.h"
+#include "../graphics/mario_pattack1.h"
+#include "../graphics/mario_pattack2.h"
+#include "../graphics/mario_pattack3.h"
 
 #define MAX_ATTACKS 3
 

@@ -1,7 +1,8 @@
 
-#include "ProjectLib.h"
-#include "Extern.h"
-#include "Error.h"
+//#include "ProjectLib.h"
+#include "CApp.h"
+//#include "Extern.h"
+//#include "Error.h"
 
 int main(void) {
 

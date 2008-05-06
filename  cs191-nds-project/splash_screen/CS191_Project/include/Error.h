@@ -1,6 +1,9 @@
+#pragma once
+
 #ifndef ERROR_H_
 #define ERROR_H_
 
+#include "ProjectLib.h"
 #include "CColor.h"
 
 CColor errColor(0,0,0);

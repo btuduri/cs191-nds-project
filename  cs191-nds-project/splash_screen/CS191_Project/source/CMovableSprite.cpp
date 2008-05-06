@@ -1,26 +1,33 @@
-#include "ProjectLib.h"
+#include "CMovableSprite.h"
 
-CMovableSprite::CMovableSprite() : CSprite() {
+CMovableSprite::CMovableSprite() {
 	setVelocity(0,0);	
 }
 
-CMovableSprite::CMovableSprite(SpriteEntry *se) : CSprite(se) {
+CMovableSprite::CMovableSprite(SpriteEntry *se) {
+	spriteEntry = se;
+	isAnimated = false;
+	angle = 0;
+	rotIndex = 0;
+	angularVelocity = 0;
+
 	setVelocity(0,0);
-//	xAcceleration = 0;
-//	yAcceleration = 0;	
 }
 
 void CMovableSprite::updatePosition(float xOffset, float yOffset) {
+	if( xMobility )
+	{
+		setX(getX()+ getXVelocity());
+		float x = getX() - xOffset;
+		spriteEntry->posX = (u16)x;
+	}
 	
-	setX(getX()+ getXVelocity());
-	setY(getY()+ getYVelocity());
-	
-	float x = getX() - xOffset;
-	float y = getY() - yOffset;
-	
-	spriteEntry->posX = (u16)x;
-	spriteEntry->posY = (u16)y;	
-
+	if( yMobility )
+	{
+		setY(getY()+ getYVelocity());
+		float y = getY() - yOffset;
+		spriteEntry->posY = (u16)y;
+	}
 }
 
 void CMovableSprite::updateAngle() {
@@ -43,3 +50,20 @@ void CMovableSprite::rotateSprite() {
     spriteRotation->vdy = c;
        
 }
+
+/*getRelationToCenter()
+ * 
+ * returns 1 if sprite is to the right of the center
+ * returns -1 if sprite is to the left of the center
+ * returns 0 if the sprite is centered
+ * 
+ * */
+int CMovableSprite::getRelationToCenter() {
+	int center = (SCREEN_WIDTH/2) - curAnimation->getXOffset();
+	if( cPosition.x > center )
+		return 1;
+	else if( cPosition.x < center )
+		return -1;
+	else return 0;
+}
+

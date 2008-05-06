@@ -1,7 +1,6 @@
-#pragma once
-
 #ifndef CSCREEN_H_
 #define CSCREEN_H_
+#pragma once
 
 #include "ProjectLib.h"
 

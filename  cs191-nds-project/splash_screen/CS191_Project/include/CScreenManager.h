@@ -1,9 +1,10 @@
-#pragma once
-
 #ifndef CSCREENMANAGER_H_
 #define CSCREENMANAGER_H_
+#pragma once
 
 #include "ProjectLib.h"
+#include "ScreenType.h"
+#include "CScreen.h"
 
 #define BG0	0
 #define BG1	1

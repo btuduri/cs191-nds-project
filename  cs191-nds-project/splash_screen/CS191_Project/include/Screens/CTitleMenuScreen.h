@@ -1,15 +1,19 @@
 #ifndef CTITLEMENUSCREEN_
 #define CTITLEMENUSCREEN_
+#pragma once
 
 #include "ProjectLib.h"
+#include "CScreen.h"
+#include "ScreenType.h"
+#include "CButton.h"
 
 // Background graphics
-#include "graphics/title.h"
-#include "graphics/splash.h"
-#include "graphics/menu0.h"
-#include "graphics/menu1.h"
-#include "graphics/menu2.h"
-#include "graphics/menu3.h"
+#include "../graphics/title.h"
+#include "../graphics/splash.h"
+#include "../graphics/menu0.h"
+#include "../graphics/menu1.h"
+#include "../graphics/menu2.h"
+#include "../graphics/menu3.h"
 
 #define BUTTON_STARTX 74
 #define BUTTON_ENDX 170

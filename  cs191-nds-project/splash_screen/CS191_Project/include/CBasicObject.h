@@ -1,5 +1,8 @@
 #ifndef CBASICOBJECT_H_
 #define CBASICOBJECT_H_
+#pragma once
+
+#include "ProjectLib.h"
 
 /**
  * Basic object definitions, to be overridden/inherited
@@ -7,8 +10,8 @@
 class CBasicObject {
 
 public:
-	CBasicObject();
-	virtual ~CBasicObject();
+	CBasicObject() {};
+	virtual ~CBasicObject() {};
 	
 	// x vars
 	float getX(){return cPosition.x;}
@@ -18,7 +21,11 @@ public:
 	float getY(){return cPosition.y;}
 	void setY(float y){cPosition.y = y;}
 	
-	void setPosition(float x, float y);
+	void setPosition(float x, float y) {
+		cPosition.x = x;
+		cPosition.y = y;
+	}
+;
 	
 protected:
 	

@@ -1,9 +1,9 @@
-#pragma once
-
 #ifndef CSPRITEMANAGER_H_
 #define CSPRITEMANAGER_H_
+#pragma once
 
 #include "ProjectLib.h"
+#include "CSprite.h"
 
 /**
  * CSpriteManager

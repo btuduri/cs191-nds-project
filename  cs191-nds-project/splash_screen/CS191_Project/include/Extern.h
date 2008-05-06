@@ -1,7 +1,6 @@
-#pragma once
-
 #ifndef EXTERN_H_
 #define EXTERN_H_
+#pragma once
 
 volatile int frame = 0;
 

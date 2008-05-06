@@ -1,7 +1,8 @@
 #ifndef CPHYSICS_H_
 #define CPHYSICS_H_
+#pragma once
 
-#include "ProjectLib.h"
+//#include "ProjectLib.h"
 
 //definitions
 #define GRAVITY	.5//9.8/SCREEN_HEIGHT
@@ -27,6 +28,8 @@ public:
 	bool gravity();
 	
 protected:
+
+	bool inAir;
 	
 	typedef struct velocity{
 		float vx;

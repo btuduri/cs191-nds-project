@@ -1,4 +1,4 @@
-#include "ProjectLib.h"
+#include "CPhysics.h"
 
 bool CPhysics::gravity() {
 	
@@ -6,3 +6,5 @@ bool CPhysics::gravity() {
 	//throw check here for collisions...
 	
 }
+
+

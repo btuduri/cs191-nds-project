@@ -1,9 +1,9 @@
-#pragma once
-
 #ifndef CSPRITE_H_
 #define CSPRITE_H_
+#pragma once
 
 #include "ProjectLib.h"
+#include "CBasicObject.h"
 
 #define SPRITE_ANGLE_MASK 0x01FF
 #define FACING_LEFT false

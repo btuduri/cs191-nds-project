@@ -18,12 +18,14 @@ void CMario::initSprite() {
 	spriteEntry->isRotoscale = false;//true;
 	spriteEntry->isHidden = false;
 	
-	setPosition(10, 120);
+	setPosition(SCREEN_WIDTH/2-32, 120);
 
     //spriteEntry->hFlip = true;
 	
 	// Default the animation lock to false
 	locked = false;
+	xMobility = false;
+	yMobility = false;
 	inAir = false;
 	isAnimated = true;
 	isLookingRight = true;
@@ -82,6 +84,9 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 		}
 //		return;
 	}
+	
+	if( !key_pressed )	// no need to update anthing else if nothing was pressed
+		return;
 	
 //UP
 	if( (keys_held & KEY_UP) || (keys_down & KEY_UP) )

@@ -1,10 +1,12 @@
 #ifndef CMARIOWALK_H_
 #define CMARIOWALK_H_
+#pragma once
 
 //TODO: change this to the walk animation...
 
 #include "ProjectLib.h"
-#include "graphics/mario_idle.h"
+#include "CAnimation.h"
+#include "../graphics/mario_idle.h"
 
 class CMarioWalk : public CAnimation
 {

@@ -1,5 +1,6 @@
 #ifndef CPOINT_H_
 #define CPOINT_H_
+#pragma once
 
 #include "ProjectLib.h"
 

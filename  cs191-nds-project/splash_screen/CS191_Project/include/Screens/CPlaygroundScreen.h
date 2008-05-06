@@ -1,11 +1,19 @@
 #ifndef CPLAYGROUNDSCREEN_H_
 #define CPLAYGROUNDSCREEN_H_
-
 #pragma once
 
 #include "ProjectLib.h"
+#include "CScreen.h"
+#include "CSpriteManager.h"
+#include "CMap.h"
+#include "CMovableSprite.h"
 
-#include "graphics/levels/level01.h"
+
+#include "CMario.h"
+#include "CKirbyMap.h"
+
+//#include "graphics/levels/level.h"
+//#include "graphics/levels/level2.h"
 
 class CPlaygroundScreen : public CScreen
 {

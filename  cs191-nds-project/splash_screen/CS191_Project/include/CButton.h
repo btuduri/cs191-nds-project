@@ -1,7 +1,9 @@
 #ifndef CBUTTON_H_
 #define CBUTTON_H_
+#pragma once
 
 #include "ProjectLib.h"
+#include "CBasicObject.h"
 
 #define DEFAULT_CLICK_RANGE 20
 
@@ -22,7 +24,6 @@ public:
 	void setStartPos(int16 x, int16 y);
 	bool canBeClicked();
 
-	
 private:
 
 	typedef struct clickRange{
@@ -37,7 +38,5 @@ private:
 
 	bool isPressed;
 };
-
-
 
 #endif /*CBUTTON_H_*/

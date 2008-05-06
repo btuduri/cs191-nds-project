@@ -1,9 +1,10 @@
-#pragma once
-
 #ifndef CAPP_H_
 #define CAPP_H_
+#pragma once
 
 #include "ProjectLib.h"
+#include "ScreenType.h"
+#include "CScreenManager.h"
 
 extern void Vblank();
 

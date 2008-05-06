@@ -1,10 +1,13 @@
 
 #include "CPlaygroundScreen.h"
-#include "CMario.h"
+//#include "CMario.h"
+//#include "CKirbyMap.h"
 
 CSpriteManager *csm;
+CMap *map;
 CMovableSprite *player1;
 CMovableSprite *player2;
+
 
 void player1Update()
 {
@@ -26,9 +29,6 @@ void player2Update()
  * */
 void CPlaygroundScreen::loadVideo()
 {
-	//Main screen
-	videoSetMode(  MODE5 | DISPLAY_BG2_ACTIVE | DISPLAY_SPR_ACTIVE | DISPLAY_SPR_1D );
-	vramSetBankA(VRAM_A_MAIN_BG_0x06000000);
 
 	// Setup VRAM_B for Sprite Binary data
 	vramSetBankB(VRAM_B_MAIN_SPRITE_0x06400000);
@@ -36,6 +36,7 @@ void CPlaygroundScreen::loadVideo()
 	//Sub screen
 //	videoSetModeSub( MODE5 | DISPLAY_BG2_ACTIVE );
 //	vramSetBankC(VRAM_C_SUB_BG_0x06200000);
+	videoSetModeSub(MODE_0_2D | DISPLAY_BG0_ACTIVE);
 	vramSetBankC(VRAM_C_SUB_BG);
 	BG_PALETTE_SUB[255] = RGB15(31,31,31);	//by default font will be rendered with color 255
 
@@ -46,17 +47,20 @@ void CPlaygroundScreen::loadVideo()
  * */
 void CPlaygroundScreen::loadBackground()
 {
-	// Main screen background
-	BG2_CR = BG_BMP8_512x512 | BG_BMP_BASE(0) | BG_PRIORITY_0;
-	BG2_XDX = 1 << 8;
-	BG2_XDY = 0;
-	BG2_YDX = 0;
-	BG2_YDY = 1 << 8;
-	BG2_CX = 0;
-	BG2_CY = 0;
 	
-	videoSetModeSub(MODE_0_2D | DISPLAY_BG0_ACTIVE);
-
+	map->loadMap();
+//	// Main screen background
+//	BG2_CR = BG_COLOR_256 | BG_RS_32x32 | BG_PRIORITY_0 | BG_BMP_BASE(0);//  | BG_MAP_BASE(0) | BG_TILE_BASE(1);// | BG_WRAP_OFF;
+////	BG2_CR = BG_COLOR_256 | BG_RS_64x64 | BG_PRIORITY_0 | BG_MAP_BASE(0) | BG_TILE_BASE(2); // | BG_WRAP_OFF;
+////	BG0_CR = BG_BMP8_512x512 | BG_PRIORITY_0 | BG_MAP_BASE(0) | BG_TILE_BASE(2); // | BG_WRAP_OFF;
+//
+//	BG2_XDX = 1 << 7;
+//	BG2_XDY = 0;
+//	BG2_YDX = 0;
+//	BG2_YDY = 1 << 7;
+//    BG2_CX = 0;
+//	BG2_CY = 0;
+	
 /*	// Sub screen background
 	SUB_BG2_CR = BG_BMP16_256x256 | BG_BMP_BASE(0) | BG_PRIORITY_0;
 	SUB_BG2_XDX = 1 << 8;
@@ -76,7 +80,9 @@ void CPlaygroundScreen::processInput()
 	u32 keys_held = keysHeld();
 
 	iprintf("\x1b[9;0Hkeys_down: %d\nkeys_up: %d\nkeys_held: %d", keys_down, keys_up, keys_held);
+	iprintf("\x1b[12;0Hmap_x: %d\nmap_y: %d", (int)map->getX(), (int)map->getY());
 	
+
 	if( keys_down | keys_up | keys_held )
 	{
 		key_pressed = true;
@@ -86,6 +92,37 @@ void CPlaygroundScreen::processInput()
 	else key_pressed = false;
 	
 	//process start/select here
+	
+	if( player1->allowedMobile() && key_pressed )
+	{
+		if( (keys_held & KEY_UP) || (keys_down & KEY_UP) )
+		{
+		}
+		if( (keys_held & KEY_DOWN) || (keys_down & KEY_DOWN) )
+		{
+			
+		}
+		if( (keys_held & KEY_LEFT) || (keys_down & KEY_LEFT) )
+		{
+			if( player1->getRelationToCenter() == 1 )	// if player is to the right of the center
+			{
+				
+				
+			}
+			if( map->scrollLeft(1) )
+				player1->lockXMobility();
+			else 
+				player1->unlockXMobility();
+		}
+		if( (keys_held & KEY_RIGHT) || (keys_down & KEY_RIGHT) )
+		{
+			if( map->scrollRight(1) )
+				player1->lockXMobility();
+			else 
+				player1->unlockXMobility();			
+		}
+	}	
+	
 	player1->updateAnimation( key_pressed, keys_down, keys_up, keys_held );
 	
 }
@@ -93,13 +130,7 @@ void CPlaygroundScreen::processInput()
 int CPlaygroundScreen::run()
 {
 	powerON(POWER_ALL);
-	loadVideo();
-	loadBackground();
-	
-	//console
-	SUB_BG0_CR = BG_MAP_BASE(31); 	// Set up the console.
-	// consoleInit() is a lot more flexible but this gets you up and running quick
-	consoleInitDefault((u16*)SCREEN_BASE_BLOCK_SUB(31), (u16*)CHAR_BASE_BLOCK_SUB(0), 16);
+	irqEnable(IRQ_VBLANK);
 	
 	CSpriteManager *sm = new CSpriteManager();
 	csm = sm;
@@ -109,10 +140,21 @@ int CPlaygroundScreen::run()
 	sm->registerSprite(mario);
 	player1 = mario;
 
+	CKirbyMap * kirbyMap = new CKirbyMap();
+	map = kirbyMap;
 //	CMario * mario1 = new CMario();
 //	sm->registerSprite(mario1);
 //	player2 = mario1;
 //	player2->setPosition(150,50);
+
+	
+	loadVideo();
+	loadBackground();	
+	//console
+	SUB_BG0_CR = BG_MAP_BASE(31); 	// Set up the console.
+	// consoleInit() is a lot more flexible but this gets you up and running quick
+	consoleInitDefault((u16*)SCREEN_BASE_BLOCK_SUB(31), (u16*)CHAR_BASE_BLOCK_SUB(0), 16);
+	
 
 	
 	// Setup Timer 2 for player 1
@@ -126,18 +168,31 @@ int CPlaygroundScreen::run()
 //	TIMER3_CR = TIMER_DIV_1024 | TIMER_IRQ_REQ | TIMER_ENABLE;
 //	irqSet(IRQ_TIMER3, 	player2Update);
 //	
-	// Copy the data from program memory to VRAM.
-	dmaCopy(level01Bitmap, (u16*)BG_BMP_RAM(0), level01BitmapLen);
+	// Copy the data from program memory to VRAM.	
+//	dmaCopy(level01Pal, BG_PALETTE, level01PalLen);
+//
+//	dmaCopy(level01Bitmap, (void*)BG_BMP_RAM(0), level01BitmapLen);
+	
 
+	// Load the map.
+//	dmaCopy(level2Pal, BG_PALETTE, level2PalLen);	
+//	dmaCopy(level2Map, (u16*)SCREEN_BASE_BLOCK(0), level2MapLen);    
+	// Load the tile graphics.
+//	dmaCopy(level2Tiles, (u16*)BG_TILE_RAM(2), level2TilesLen); 
+	
+//	swiDecompressLZSSVram((void*)level01Bitmap, BG_GFX, 0, &level01_decomp);
 	// Copy the data from program memory to VRAM.
 	//dmaCopy(titleBitmap, (u16*)BG_BMP_RAM_SUB(0), titleBitmapLen);
+	// Load the palette (thanks WinGrit)
+//	dmaCopy(levelPal, BG_PALETTE, levelPalLen);	
+//	dmaCopy(levelBitmap, (void*)BG_BMP_RAM(0), levelBitmapLen);
  
 	bool showing = true;
 	while (showing) {
 
 		processInput();
 		sm->updateOAM();
-		
+
 //		if ( !(REG_KEYINPUT & KEY_START))
 //			showing = false;
 //		mario->update();

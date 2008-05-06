@@ -1,5 +1,6 @@
 #ifndef CCOLOR_H_
 #define CCOLOR_H_
+#pragma once
 
 #include "ProjectLib.h"
 

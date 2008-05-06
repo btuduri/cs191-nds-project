@@ -1,11 +1,10 @@
-#pragma once
-
 #ifndef CSPRITEROTATIONS_H_
 #define CSPRITEROTATIONS_H_
+#pragma once
 
 #include "ProjectLib.h"
-
-#include "graphics/projects/sprite_rotation.h"
+#include "CMovableSprite.h"
+#include "../graphics/projects/sprite_rotation.h"
 
 class CSpriteRotations : public CMovableSprite
 {

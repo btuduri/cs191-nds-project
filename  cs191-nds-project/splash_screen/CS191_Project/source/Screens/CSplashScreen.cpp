@@ -6,11 +6,11 @@
 void CSplashScreen::loadVideo()
 {
 	//Main screen
-	videoSetMode(  MODE5 | DISPLAY_BG2_ACTIVE );
+	videoSetMode(  MODE_5_2D | DISPLAY_BG2_ACTIVE );
 	vramSetBankA(VRAM_A_MAIN_BG_0x06000000);
 
 	//Sub screen
-	videoSetModeSub( MODE5 | DISPLAY_BG2_ACTIVE );
+	videoSetModeSub( MODE_5_2D | DISPLAY_BG2_ACTIVE );
 	vramSetBankC(VRAM_C_SUB_BG_0x06200000);
 }
 
