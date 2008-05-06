@@ -1,8 +1,8 @@
 #include "CTitleMenuScreen.h"
 
 //Sprites
-#include "graphics/mario.h"
 #include "CMario.h"
+#include "../graphics/mario.h"
 
 tOAM sprites;
 
@@ -49,11 +49,11 @@ void AnimateMario(void)
 void CTitleMenuScreen::loadVideo()
 {
 	//Main screen
-	videoSetMode(  MODE5 | DISPLAY_BG2_ACTIVE | DISPLAY_SPR_ACTIVE | DISPLAY_SPR_1D );
+	videoSetMode(  MODE_5_2D | DISPLAY_BG2_ACTIVE | DISPLAY_SPR_ACTIVE | DISPLAY_SPR_1D );
 	vramSetBankA(VRAM_A_MAIN_BG_0x06000000);
 
 	//Sub screen
-	videoSetModeSub( MODE5 | DISPLAY_BG2_ACTIVE );
+	videoSetModeSub( MODE_5_2D | DISPLAY_BG2_ACTIVE );
 	vramSetBankC(VRAM_C_SUB_BG_0x06200000);
 }
 
@@ -260,10 +260,10 @@ int CTitleMenuScreen::run()
 	
 	switch( btnSelect )
 	{
-	case 1: return PlaygroundScreen; break;
-	case 2:	return TitleMenuScreen; break;
-	case 3: return SplashScreen; break;
-	default: return TitleMenuScreen;
+		case 1: return PlaygroundScreen; break;
+		case 2:	return TitleMenuScreen; break;
+		case 3: return SplashScreen; break;
+		default: return TitleMenuScreen;
 	};
 	
 	return 0;

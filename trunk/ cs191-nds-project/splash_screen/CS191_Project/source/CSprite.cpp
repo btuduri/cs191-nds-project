@@ -1,5 +1,4 @@
-
-#include "ProjectLib.h"
+#include "CSprite.h"
 
 CSprite::CSprite( SpriteEntry * se )
 {
@@ -77,3 +76,4 @@ void CSprite::setFacingDirection(bool isRight) {
 	isLookingRight = isRight;
 	spriteEntry->hFlip = (isLookingRight) ? false : true ;
 }
+

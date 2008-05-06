@@ -1,7 +1,12 @@
-#pragma once
-
 #ifndef SCREENTYPE_H_
 #define SCREENTYPE_H_
+#pragma once
+
+//Screens
+#include "CSplashScreen.h"
+#include "CTitleMenuScreen.h"
+//#include "CSpriteRotationScreen.h"
+#include "CPlaygroundScreen.h"
 
 // change this to override the default screen (the first screen shown)
 #define DEFAULT_SCREEN PlaygroundScreen //SplashScreen

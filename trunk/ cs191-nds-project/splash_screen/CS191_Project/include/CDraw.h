@@ -1,5 +1,6 @@
 #ifndef CDRAW_H_
 #define CDRAW_H_
+#pragma once
 
 #include "ProjectLib.h"
 

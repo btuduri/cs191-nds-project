@@ -1,8 +1,10 @@
 #ifndef CMARIOIDLE_H_
 #define CMARIOIDLE_H_
+#pragma once
 
 #include "ProjectLib.h"
-#include "graphics/mario_idle.h"
+#include "CAnimation.h"
+#include "../graphics/mario_idle.h"
 
 class CMarioIdle : public CAnimation
 {

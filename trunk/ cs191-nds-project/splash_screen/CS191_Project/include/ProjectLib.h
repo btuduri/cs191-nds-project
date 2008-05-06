@@ -5,6 +5,66 @@
 
 #define DEBUG 1
 
+// Forward-Declarations
+//class CBasicObject;
+//class CColor;
+//class CSprite;
+//class CSpriteRotationScreen;
+//class CPlaygroundScreen;
+//class CAnimation;
+//class CMap;
+//class CPlayer;
+
+
+//Project includes
+//class CPoint;
+//class CColor;
+//class CBasicObject;
+//class CMath;
+//class CDraw;
+//class CButton;
+
+//
+//// Application
+//class CApp;
+//class ScreenType;
+//class CScreen;
+//class CScreenManager;
+//class CPhysics;
+////class CControls;
+//
+//// Sprites
+//class SpriteType;
+//class CSprite;
+//class AnimationTypes;
+//class CAnimation;
+//class CSpriteManager;
+////class CMovableSprite;
+//
+////Maps
+//class CMap;
+//class CKirbyMap;
+////Player
+////class CMario;
+////class CPlayer;
+////Screens
+//class CSplashScreen;
+//class CTitleMenuScreen;
+////class CSpriteRotationScreen;
+//class CPlaygroundScreen;
+
+//project definitions and enums
+//extern void Error(u16 r, u16 g, u16 b);
+//extern CColor errColor;
+//extern void Error();
+//extern void Error(u16 r, u16 g, u16 b);
+
+
+
+enum PlayerType {
+	PMario	
+};
+
 //NDS includes
 #include <nds.h>
 
@@ -16,42 +76,47 @@
 #include <cassert>
 #include <time.h>
 
-class CBasicObject;
-class CColor;
-class CSprite;
-//class CSpriteManager;
-class CSpriteRotationScreen;
-class CPlaygroundScreen;
-
-//extern void Error(u16 r, u16 g, u16 b);
-extern CColor errColor;
-extern void Error();
-extern void Error(u16 r, u16 g, u16 b);
-
 //Project includes
 #include "CPoint.h"
 #include "CColor.h"
-#include "CBasicObject.h"
+//#include "CBasicObject.h"
 #include "CMath.h"
 #include "CDraw.h"
-#include "CButton.h"
-#include "ScreenType.h"
-#include "SpriteType.h"
-#include "CApp.h"
-#include "CScreen.h"
-#include "CScreenManager.h"
-#include "CPhysics.h"
-#include "CSprite.h"
-#include "CMovableSprite.h"
-#include "CSpriteManager.h"
-#include "AnimationTypes.h"
-#include "CAnimation.h"
 
-//Screens
-#include "CSplashScreen.h"
-#include "CTitleMenuScreen.h"
-#include "CSpriteRotationScreen.h"
-#include "CPlaygroundScreen.h"
+//#include "ScreenType.h"
+//#include "Error.h"
+//#include "Extern.h"
+//#include "SpriteType.h"
 
+//
+//// Application
+//#include "CApp.h"
+//#include "ScreenType.h"
+//#include "CScreen.h"
+//#include "CScreenManager.h"
+//#include "CPhysics.h"
+//
+//// Sprites
+//#include "SpriteType.h"
+//#include "CSprite.h"
+//#include "AnimationTypes.h"
+//#include "CAnimation.h"
+//#include "CMovableSprite.h"
+//#include "CSpriteManager.h"
+//
+////Maps
+//#include "CMap.h"
+//#include "CKirbyMap.h"
+//
+////Player
+//#include "CMario.h"
+//#include "CPlayer.h"
+//#include "CControls.h"
+//
+////Screens
+//#include "CSplashScreen.h"
+//#include "CTitleMenuScreen.h"
+//#include "CSpriteRotationScreen.h"
+//#include "CPlaygroundScreen.h"
 
 #endif /*PROJECTLIB_H_*/

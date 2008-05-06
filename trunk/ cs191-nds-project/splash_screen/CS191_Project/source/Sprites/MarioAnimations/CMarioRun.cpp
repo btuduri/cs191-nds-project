@@ -1,5 +1,4 @@
 #include "CMarioRun.h"
-#include "graphics/mario_idle.h"
 
 CMarioRun::CMarioRun()
 {	

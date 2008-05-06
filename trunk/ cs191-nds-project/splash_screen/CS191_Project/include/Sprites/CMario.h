@@ -4,8 +4,7 @@
 #define CMARIO_H_
 
 #include "ProjectLib.h"
-//#include "gfx/smmario.h"
-
+#include "CMovableSprite.h"
 
 #include "MarioAnimations/CMarioCrouch.h"
 #include "MarioAnimations/CMarioIdle.h"
@@ -18,10 +17,8 @@
 #define JUMP_VELOCITY 10.0
 #define RUN_VELOCITY 10.0
 
+class CMario : public CMovableSprite {
 
-
-class CMario : public CMovableSprite
-{
 public:
 	virtual ~CMario();
 
@@ -32,16 +29,13 @@ public:
 	
 	
 private:
-	bool inAir;
 	
-	CAnimation * curAnimation;
-	
-	CMarioCrouch aniCrouch;
 	CMarioIdle aniIdle;
 	CMarioJump aniJump;
 	CMarioPAttack aniPAttack;
 	CMarioRun aniRun;
 	CMarioWalk aniWalk;
+	CMarioCrouch aniCrouch;
 	
 //	u32 xoffset;
 //	u32 yoffset;

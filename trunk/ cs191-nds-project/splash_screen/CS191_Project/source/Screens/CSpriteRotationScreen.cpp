@@ -1,9 +1,8 @@
 
-#include "ProjectLib.h"
+//#include "ProjectLib.h"
 #include "CSpriteRotationScreen.h"
-#include "Projects/CSpriteRotations.h"
 
-#include "graphics/projects/rotate_screen.h"
+#include "../graphics/projects/rotate_screen.h"
 //#include "../gfx/projects/sprite_rotation.h"
 
 CMovableSprite *sprite1;
@@ -59,13 +58,13 @@ void spritesUpdate()
 void CSpriteRotationScreen::loadVideo()
 {
 	//Main screen
-	videoSetMode(  MODE5 | DISPLAY_BG2_ACTIVE | DISPLAY_BG3_ACTIVE );
+	videoSetMode(  MODE_5_2D | DISPLAY_BG2_ACTIVE | DISPLAY_BG3_ACTIVE );
 	vramSetBankA(VRAM_A_MAIN_BG_0x06000000);
 	vramSetBankB(VRAM_B_MAIN_BG_0x06020000);
 	// Setup VRAM_B for Sprite Binary data
 	
 	//Sub screen
-	videoSetModeSub( MODE5 | DISPLAY_BG2_ACTIVE | DISPLAY_SPR_ACTIVE | DISPLAY_SPR_1D );
+	videoSetModeSub( MODE_5_2D | DISPLAY_BG2_ACTIVE | DISPLAY_SPR_ACTIVE | DISPLAY_SPR_1D );
 	vramSetBankC(VRAM_C_SUB_BG_0x06200000);
 	vramSetBankD(VRAM_D_SUB_SPRITE);
 	//vramSetBankI(VRAM_I_SUB_SPRITE_EXT_PALETTE);

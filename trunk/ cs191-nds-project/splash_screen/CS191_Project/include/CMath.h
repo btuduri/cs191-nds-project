@@ -1,5 +1,6 @@
 #ifndef CMATH_H_
 #define CMATH_H_
+#pragma once
 
 #include "ProjectLib.h"
 

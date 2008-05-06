@@ -1,9 +1,13 @@
-#pragma once
-
 #ifndef CSPRITEROTATIONSCREEN_H_
 #define CSPRITEROTATIONSCREEN_H_
+#pragma once
 
 #include "ProjectLib.h"
+#include "CScreen.h"
+#include "CButton.h"
+#include "Projects/CSpriteRotations.h"
+#include "CDraw.h"
+#include "CSpriteManager.h"
 
 class CSpriteRotationScreen : public CScreen
 {

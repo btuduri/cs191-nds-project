@@ -2,10 +2,11 @@
 #define CSPLASHSCREEN_H_
 
 #include "ProjectLib.h"
-
+#include "CScreen.h"
+#include "ScreenType.h"
 // Background graphics
-#include "graphics/title.h"
-#include "graphics/splash.h"
+#include "../graphics/title.h"
+#include "../graphics/splash.h"
 
 class CSplashScreen : public CScreen
 {

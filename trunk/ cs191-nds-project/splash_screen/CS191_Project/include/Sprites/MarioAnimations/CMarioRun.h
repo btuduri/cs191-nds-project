@@ -1,8 +1,10 @@
 #ifndef CMARIORUN_H_
 #define CMARIORUN_H_
+#pragma once
 
 #include "ProjectLib.h"
-#include "graphics/mario_run.h"
+#include "CAnimation.h"
+#include "../graphics/mario_run.h"
 
 class CMarioRun : public CAnimation
 {

@@ -9,7 +9,7 @@ void CApp::run() {
 	
 	powerON(POWER_ALL);	
 	irqInit();
-	irqSet(IRQ_VBLANK, Vblank);
+	irqSet(IRQ_VBLANK, 0);//Vblank);
 
 	bool quit = false;
 	CScreenManager * sm = new CScreenManager();

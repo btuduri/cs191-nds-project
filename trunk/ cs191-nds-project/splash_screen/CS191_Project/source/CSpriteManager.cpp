@@ -1,5 +1,5 @@
-
 #include "CSpriteManager.h"
+#include "Error.h"
 
 CSpriteManager::CSpriteManager(bool sub) {
 	numSprites = 0;

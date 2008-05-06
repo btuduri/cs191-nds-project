@@ -1,8 +1,10 @@
 #ifndef CMARIOCROUCH_H_
 #define CMARIOCROUCH_H_
+#pragma once
 
 #include "ProjectLib.h"
-#include "graphics/mario_crouch.h"
+#include "CAnimation.h"
+#include "../graphics/mario_crouch.h"
 
 class CMarioCrouch : public CAnimation
 {
