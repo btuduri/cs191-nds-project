@@ -34,6 +34,9 @@ public:
 	u16 getXOffset(){ return xoffset; }
 	u16 getYOffset(){ return yoffset; }
 	
+	u16 getImageSize(){return imageSize;}
+	
+	
 protected:
 
 	u16 numImages;

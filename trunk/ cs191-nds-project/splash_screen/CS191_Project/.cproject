@@ -57,6 +57,7 @@
 <listOptionValue builtIn="false" value="&quot;C:\devkitPro\libnds\include&quot;"/>
 <listOptionValue builtIn="false" value="&quot;C:\devkitPro\devkitARM\arm-eabi\include&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/graphics}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/Players}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/Levels}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/Screens}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/CS191_Project/include/Sprites}&quot;"/>

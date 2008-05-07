@@ -1,10 +1,10 @@
-#include "CMario.h"
+#include "CMarioSprite.h"
 
-CMario::~CMario()
+CMarioSprite::~CMarioSprite()
 {
 }
 
-void CMario::initSprite() {
+void CMarioSprite::initSprite() {
 	
 	//Initalize the spriteEntry info.  Most of this isn't changed after we've set this.
 	//Possible vars to change are: tileIdx, X and Y pos, and isHidden.
@@ -32,11 +32,14 @@ void CMario::initSprite() {
 	curAnimation = &aniIdle;
 	angle = 0;
 
+	runVelocity = MARIO_RUN_VELOCITY;
+	jumpVelocity = MARIO_JUMP_VELOCITY;
+
 	curAnimation->load(spriteEntry);
 	
 }
 
-void CMario::update() {
+void CMarioSprite::update() {
 	
 	curAnimation->update(spriteEntry);
 
@@ -51,7 +54,7 @@ void CMario::update() {
 	
 }
 
-void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 keys_held ) {
+void CMarioSprite::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 keys_held ) {
 	
 //	if( inAir && !(keys_held & KEY_UP) )
 //	{
@@ -107,7 +110,7 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 				inAir = true;
 				curAnimation = &aniJump;
 				curAnimation->load(spriteEntry);
-				setYVelocity(-JUMP_VELOCITY);
+				setYVelocity(-MARIO_JUMP_VELOCITY);
 				update();
 			}
 //			errColor.green();
@@ -185,53 +188,75 @@ void CMario::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 
 //		return;
 	}	
 	
-	if( !(curAnimation->isAnimationLocked()) )
-	{
-		if( (keys_down & KEY_LEFT) || (keys_held & KEY_LEFT) )
-		{
-			if(getFacingDirection()!= FACING_LEFT)
-				setFacingDirection(FACING_LEFT);
-			
-			if( (curAnimation != &aniRun) )
-			{
-				curAnimation = &aniRun;
-				curAnimation->load(spriteEntry);
-				update();
-			}
-			setXVelocity(-RUN_VELOCITY);
+//	if( !(curAnimation->isAnimationLocked()) )
+//	{
+//		if( (keys_down & KEY_LEFT) || (keys_held & KEY_LEFT) )
+//		{
+//			setXVelocity(-RUN_VELOCITY);
 
 //			errColor.yellow();
 //			Error();
 //			return;
-		}
+//		}
 		
-		if( keys_up & KEY_LEFT  &&  !(keys_held & KEY_RIGHT) )
-		{
-			setXVelocity(0);
-		}
+//		if( keys_up & KEY_LEFT  &&  !(keys_held & KEY_RIGHT) )
+//		{
+//			setXVelocity(0);
+//		}
 		
-		if( (keys_down & KEY_RIGHT)  || (keys_held & KEY_RIGHT) )
-		{
-			if(getFacingDirection()!=FACING_RIGHT)
-				setFacingDirection(FACING_RIGHT);
-		
-			if( (curAnimation != &aniRun) )
-			{
-				curAnimation = &aniRun;
-				curAnimation->load(spriteEntry);
-				update();
-			}
-			setXVelocity(RUN_VELOCITY);
+//		if( (keys_down & KEY_RIGHT)  || (keys_held & KEY_RIGHT) )
+//		{
+//			if(getFacingDirection()!=FACING_RIGHT)
+//				setFacingDirection(FACING_RIGHT);
+//		
+//			if( (curAnimation != &aniRun) )
+//			{
+//				curAnimation = &aniRun;
+//				curAnimation->load(spriteEntry);
+//				update();
+//			}
+//			setXVelocity(RUN_VELOCITY);
 //			errColor.cyan();
 //			Error();
-			return;
-		}
+//			return;
+//		}
 		
-		if( keys_up & KEY_RIGHT   &&  !(keys_held & KEY_LEFT) )
-		{
-			setXVelocity(0);
-		}
 
+//	}
+}
+
+void CMarioSprite::leftKey() {
+
+	if( curAnimation->isAnimationLocked() )
+		return;
+	
+	if(getFacingDirection()!= FACING_LEFT)
+		setFacingDirection(FACING_LEFT);
+	
+	if( (curAnimation != &aniRun) )
+	{
+		curAnimation = &aniRun;
+		curAnimation->load(spriteEntry);
+		update();
+	}
+	
+}
+
+void CMarioSprite::rightKey() {
+
+	if( curAnimation->isAnimationLocked() )
+		return;
+
+	if(getFacingDirection()!= FACING_RIGHT)
+		setFacingDirection(FACING_RIGHT);
+
+	if( (curAnimation != &aniRun) )
+	{
+		curAnimation = &aniRun;
+		curAnimation->load(spriteEntry);
+		update();
 	}
 }
 
+void CMarioSprite::upKey(){}
+void CMarioSprite::downKey(){}

@@ -1,10 +1,11 @@
 #pragma once
 
-#ifndef CMARIO_H_
-#define CMARIO_H_
+#ifndef CMARIOSPRITE_H_
+#define CMARIOSPRITE_H_
 
 #include "ProjectLib.h"
 #include "CMovableSprite.h"
+#include "CControlKeys.h"
 
 #include "MarioAnimations/CMarioCrouch.h"
 #include "MarioAnimations/CMarioIdle.h"
@@ -14,19 +15,23 @@
 #include "MarioAnimations/CMarioWalk.h"
 
 //definitions
-#define JUMP_VELOCITY 10.0
-#define RUN_VELOCITY 10.0
+#define MARIO_JUMP_VELOCITY 10.0
+#define MARIO_RUN_VELOCITY 10.0
 
-class CMario : public CMovableSprite {
+class CMarioSprite : public CMovableSprite {
 
 public:
-	virtual ~CMario();
+	virtual ~CMarioSprite();
 
 	void initSprite();
 	
 	void update();
 	void updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 keys_held );
 	
+	void leftKey();
+	void rightKey();
+	void upKey();
+	void downKey();
 	
 private:
 	
@@ -42,4 +47,4 @@ private:
 	
 };
 
-#endif /*CMARIO_H_*/
+#endif /*CMARIOSPRITE_H_*/

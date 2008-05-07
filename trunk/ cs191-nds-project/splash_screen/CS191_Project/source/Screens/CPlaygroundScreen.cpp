@@ -73,58 +73,58 @@ void CPlaygroundScreen::loadBackground()
 
 void CPlaygroundScreen::processInput()
 {	
-	scanKeys();
-	
-	u32 keys_down = keysDown();
-	u32 keys_up = keysUp();
-	u32 keys_held = keysHeld();
-
-	iprintf("\x1b[9;0Hkeys_down: %d\nkeys_up: %d\nkeys_held: %d", keys_down, keys_up, keys_held);
-	iprintf("\x1b[12;0Hmap_x: %d\nmap_y: %d", (int)map->getX(), (int)map->getY());
-	
-
-	if( keys_down | keys_up | keys_held )
-	{
-		key_pressed = true;
-//		errColor.blue();
-//		Error();
-	}
-	else key_pressed = false;
-	
-	//process start/select here
-	
-	if( player1->allowedMobile() && key_pressed )
-	{
-		if( (keys_held & KEY_UP) || (keys_down & KEY_UP) )
-		{
-		}
-		if( (keys_held & KEY_DOWN) || (keys_down & KEY_DOWN) )
-		{
-			
-		}
-		if( (keys_held & KEY_LEFT) || (keys_down & KEY_LEFT) )
-		{
-			if( player1->getRelationToCenter() == 1 )	// if player is to the right of the center
-			{
-				
-				
-			}
-			if( map->scrollLeft(1) )
-				player1->lockXMobility();
-			else 
-				player1->unlockXMobility();
-		}
-		if( (keys_held & KEY_RIGHT) || (keys_down & KEY_RIGHT) )
-		{
-			if( map->scrollRight(1) )
-				player1->lockXMobility();
-			else 
-				player1->unlockXMobility();			
-		}
-	}	
-	
-	player1->updateAnimation( key_pressed, keys_down, keys_up, keys_held );
-	
+//	scanKeys();
+//	
+//	u32 keys_down = keysDown();
+//	u32 keys_up = keysUp();
+//	u32 keys_held = keysHeld();
+//
+//	iprintf("\x1b[9;0Hkeys_down: %d\nkeys_up: %d\nkeys_held: %d", keys_down, keys_up, keys_held);
+//	iprintf("\x1b[12;0Hmap_x: %d\nmap_y: %d", (int)map->getX(), (int)map->getY());
+//	
+//
+//	if( keys_down | keys_up | keys_held )
+//	{
+//		key_pressed = true;
+////		errColor.blue();
+////		Error();
+//	}
+//	else key_pressed = false;
+//	
+//	//process start/select here
+//	
+//	if( player1->allowedMobile() && key_pressed )
+//	{
+//		if( (keys_held & KEY_UP) || (keys_down & KEY_UP) )
+//		{
+//		}
+//		if( (keys_held & KEY_DOWN) || (keys_down & KEY_DOWN) )
+//		{
+//			
+//		}
+//		if( (keys_held & KEY_LEFT) || (keys_down & KEY_LEFT) )
+//		{
+//			if( player1->getRelationToCenter() == 1 )	// if player is to the right of the center
+//			{
+//				
+//				
+//			}
+//			if( map->scrollLeft(1) )
+//				player1->lockXMobility();
+//			else 
+//				player1->unlockXMobility();
+//		}
+//		if( (keys_held & KEY_RIGHT) || (keys_down & KEY_RIGHT) )
+//		{
+//			if( map->scrollRight(1) )
+//				player1->lockXMobility();
+//			else 
+//				player1->unlockXMobility();			
+//		}
+//	}	
+//	
+//	player1->updateAnimation( key_pressed, keys_down, keys_up, keys_held );
+//	
 }
 
 int CPlaygroundScreen::run()
@@ -136,9 +136,9 @@ int CPlaygroundScreen::run()
 	csm = sm;
 
 	//assert(false);
-	CMario * mario = new CMario();
-	sm->registerSprite(mario);
-	player1 = mario;
+//	CMario * mario = new CMario();
+//	sm->registerSprite(mario);
+//	player1 = mario;
 
 	CKirbyMap * kirbyMap = new CKirbyMap();
 	map = kirbyMap;
@@ -147,6 +147,8 @@ int CPlaygroundScreen::run()
 //	player2 = mario1;
 //	player2->setPosition(150,50);
 
+	
+//	CControls * controls = new CControls(map, player1);
 	
 	loadVideo();
 	loadBackground();	
@@ -190,7 +192,8 @@ int CPlaygroundScreen::run()
 	bool showing = true;
 	while (showing) {
 
-		processInput();
+//		processInput();
+//		controls->processInput();
 		sm->updateOAM();
 
 //		if ( !(REG_KEYINPUT & KEY_START))

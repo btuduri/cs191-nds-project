@@ -157,14 +157,14 @@ int CSpriteRotationScreen::run()
 	sprite3 = s3;	
 	
 	// sprite info
-	s1-> setXVelocity(4);
-	s1-> setYVelocity(4);
+	s1->setXVelocity(4);
+	s1->setYVelocity(4);
 	s2->setPosition(100, 78);
-	s2-> setXVelocity(6);
-	s2-> setYVelocity(-6);
+	s2->setXVelocity(6);
+	s2->setYVelocity(-6);
 	s3->setPosition(150, 50);
-	s3-> setXVelocity(-2);
-	s3-> setYVelocity(-2);
+	s3->setXVelocity(-2);
+	s3->setYVelocity(-2);
 	
 	// Bottom screen
 	dmaCopy(rotate_screenBitmap, (u16*)BG_BMP_RAM(0), rotate_screenBitmapLen);
