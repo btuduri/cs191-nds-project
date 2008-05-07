@@ -7,6 +7,7 @@
 #include "CSpriteManager.h"
 #include "CMap.h"
 #include "CMovableSprite.h"
+#include "CControls.h"
 
 
 #include "CMario.h"

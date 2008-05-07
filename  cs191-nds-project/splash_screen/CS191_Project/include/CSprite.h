@@ -27,8 +27,8 @@ public:
 
 	// Handle sprite specific code here.  Ie. Rotation, Hidden, etc	
 	void setSpriteVisibility(bool hidden);
-	void setPosition(float x, float y);
-
+	void setPosition(float x, float y);	
+	
 	int radToDeg512(float rad);
 	u16 getAngleDeg512(){ return radToDeg512(angle); }
 	
@@ -41,7 +41,6 @@ public:
 	void setSpriteRotationIndex( u8 index ) { rotIndex = index; spriteEntry->rsMatrixIdx = index;/*ATTR1_ROTDATA(index);*/ }
 	float getAngleRad(){ return angle; }
 	u8 getRotIndex() { return rotIndex; }
-
 	
 	// Handle sprite variable code here (getters/setters)
 	void setTileIndex(int index){ spriteEntry->tileIdx = index; }

@@ -16,6 +16,11 @@ public:
 	void updatePosition(float xOffset, float yOffset);
 	void updateAngle();
 	void rotateSprite();
+	u16 getSpriteWidth() { return curAnimation->getImageSize(); }
+
+	float getRunVelocity(){ return runVelocity; }
+	float getJumpVelocity(){ return jumpVelocity; }
+
 	
 	// rotation and angle
 	float getAngularVelocity(){return angularVelocity;}
@@ -39,6 +44,9 @@ protected:
 
 	bool xMobility;
 	bool yMobility;
+	
+	float runVelocity;
+	float jumpVelocity;
 };
 
 #endif /*CMOVABLESPRITE_*/
