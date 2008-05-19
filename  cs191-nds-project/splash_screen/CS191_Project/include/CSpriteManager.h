@@ -5,6 +5,8 @@
 #include "ProjectLib.h"
 #include "CSprite.h"
 
+#define MAX_SPRITE_SIZE 64
+
 /**
  * CSpriteManager
  * 		- init ALL sprites ( zero them out )

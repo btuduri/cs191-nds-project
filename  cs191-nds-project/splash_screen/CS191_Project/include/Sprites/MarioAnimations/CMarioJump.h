@@ -6,8 +6,10 @@
 #include "CAnimation.h"
 
 // jump animation, is basically crouch + jump
-#include "../graphics/mario_crouch.h"
-#include "../graphics/mario_jump.h"
+//#include "../graphics/mario_crouch.h"
+//#include "../graphics/mario_jump.h"
+#include "../graphics/mario_sprites.h"
+
 
 class CMarioJump : public CAnimation
 {
@@ -15,14 +17,15 @@ public:
 	CMarioJump();
 	virtual ~CMarioJump();
 	
-	void update(SpriteEntry *se);
-	void load(SpriteEntry *se);
+	void update(CSprite *sprite);
+	void load(CSprite *sprite);
+
+	void loadJump();
 	
 private:
-	void loadJump();
 
 	bool jump;
-	SpriteEntry * se;
+	CSprite *sprite;
 	u16 curImage;
 };
 

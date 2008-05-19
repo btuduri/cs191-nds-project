@@ -6,16 +6,15 @@
 #include "ScreenType.h"
 #include "CScreenManager.h"
 
-extern void Vblank();
+//extern void Vblank();
 
 class CApp {
 public:
-	CApp(){};		//TODO: write this...
-	~CApp(){}; 	//TODO: write this...
+//	CApp(){}
+//	~CApp(){}
 	
 	void run();
 	
-private:
 };
 
 #endif /*CAPP_H_*/

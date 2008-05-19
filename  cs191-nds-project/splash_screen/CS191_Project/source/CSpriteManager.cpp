@@ -64,18 +64,19 @@ void CSpriteManager::initOAM(bool sub) {
 void CSpriteManager::registerSprite(CSprite *sprite, bool isRotatable, s16 rotationIndex) {
 	
 	int index;
+	int rotIndex = 0;
 	
 	// Set up the sprite and give it an index within the oam
 	index = getNextSpriteIndex();
-//	sprite->setIndex( index );
 	sprite->setSpriteEntry(&oam.spriteBuffer[index]);
 	sprite->initSprite();
-	
+	sprite->setSpriteIndex(index);
+	sprite->setTileIndex( index*256 );
+
 	// If the sprite can rotate, we'll assign it a rotation matrix.
 	// TODO: fix this code to accommodate more than 32 rotations
 	if(isRotatable==true)
 	{
-		int rotIndex;
 		
 //		if( (index >= 0) && (rotations[index] == 0 ) )
 //		{
@@ -85,6 +86,7 @@ void CSpriteManager::registerSprite(CSprite *sprite, bool isRotatable, s16 rotat
 //		else
 		if ( rotationIndex > -1 )
 		{
+			rotIndex = rotationIndex;
 			rotations[rotationIndex] = 0;
 			sprite->setSpriteRotationIndex(rotationIndex);
 			sprite->setSpriteRotation(&oam.matrixBuffer[rotationIndex]);
@@ -99,6 +101,9 @@ void CSpriteManager::registerSprite(CSprite *sprite, bool isRotatable, s16 rotat
 	}
 		
 	sprites[index] = sprite;
+//	sprite->setTileIndex( (rotIndex*32) / 32 );
+//    sprite->setObjPal(rotIndex*8);
+    
 	numSprites++;
 
 }
@@ -167,6 +172,7 @@ void CSpriteManager::unregisterSprite( int index ) {
 		
 	// Unregister the rotation index if it was being used
 	int rotIndex = sprites[index]->getRotIndex();
+	rotIndex = sprites[index]->getRotIndex();
 	if( rotIndex != 0 )
 	{
 		if( rotIndex < nextRotationIndex)

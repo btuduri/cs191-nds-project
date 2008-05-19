@@ -4,7 +4,8 @@
 
 #include "ProjectLib.h"
 #include "CAnimation.h"
-#include "../graphics/mario_crouch.h"
+//#include "../graphics/mario_crouch.h"
+#include "../graphics/mario_sprites.h"
 
 class CMarioCrouch : public CAnimation
 {
@@ -12,8 +13,8 @@ public:
 	CMarioCrouch();
 	virtual ~CMarioCrouch();
 
-	void update(SpriteEntry *se);
-	void load(SpriteEntry *se);
+	void update(CSprite *sprite);
+	void load(CSprite *sprite);
 	//overloaded
 	void forceUnlock();
 	

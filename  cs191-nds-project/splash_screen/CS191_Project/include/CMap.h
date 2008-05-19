@@ -8,7 +8,7 @@
 class CMap : public CBasicObject {
 	
 public:
-
+	
 	virtual ~CMap(){};
 	
 	virtual void initalizeMap()=0;
@@ -19,12 +19,11 @@ public:
 	virtual bool scrollUp( u16 units )=0;
 	virtual bool scrollDown( u16 units )=0;
 	
-	
 	void setScale(u16 s) { scale = s; }
 	float getScale() { return scale; }
 	
 protected:
-
+	
 	int scale;
 	
 };

@@ -57,9 +57,8 @@ void CSprite::setPosition(float x, float y) {
 	setX(x);
 	setY(y);
 	
-	spriteEntry->posX = (u16)x;
-	spriteEntry->posY = (u16)y;	
-//	setPosition(x, y);
+	spriteEntry->posX = (u16)(x + 512);
+	spriteEntry->posY = (u16)(y + 512);	
 }
 
 
@@ -75,5 +74,23 @@ void CSprite::toggleFacingDirection() {
 void CSprite::setFacingDirection(bool isRight) {
 	isLookingRight = isRight;
 	spriteEntry->hFlip = (isLookingRight) ? false : true ;
+}
+
+bool CSprite::checkIfOnScreen() {
+	float x = getX();
+	float y = getY();
+	float w = getWidth();
+	float h = getHeight();
+	
+	bool offScreen = false;
+	
+	if( (x > SCREEN_WIDTH) || ( (x+w) < 0 ))
+		offScreen = true;
+	
+	if( (y > SCREEN_HEIGHT) || ( (y+h) < 0 ))
+		offScreen = true;
+	
+	isOffScreen = offScreen;
+	return !isOffScreen;
 }
 

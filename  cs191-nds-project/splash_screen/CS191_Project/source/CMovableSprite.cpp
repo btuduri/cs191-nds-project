@@ -4,7 +4,7 @@ CMovableSprite::CMovableSprite() {
 	setVelocity(0,0);	
 }
 
-CMovableSprite::CMovableSprite(SpriteEntry *se) {
+CMovableSprite::CMovableSprite(SpriteEntry *se) : CSprite(se) {
 	spriteEntry = se;
 	isAnimated = false;
 	angle = 0;
@@ -14,19 +14,28 @@ CMovableSprite::CMovableSprite(SpriteEntry *se) {
 	setVelocity(0,0);
 }
 
-void CMovableSprite::updatePosition(float xOffset, float yOffset) {
+void CMovableSprite::updatePosition() {
+	
+	bool onScreen = checkIfOnScreen();
+
 	if( xMobility )
 	{
 		setX(getX()+ getXVelocity());
-		float x = getX() - xOffset;
-		spriteEntry->posX = (u16)x;
 	}
+	
 	
 	if( yMobility )
 	{
 		setY(getY()+ getYVelocity());
-		float y = getY() - yOffset;
-		spriteEntry->posY = (u16)y;
+	}
+
+	if( onScreen )
+	{
+		float x = getX() - curAnimation->getXOffset();//xOffset;
+		spriteEntry->posX = (u16)(x+512);
+	
+		float y = getY() - curAnimation->getYOffset();
+		spriteEntry->posY = (u16)(y+512);
 	}
 }
 
@@ -59,10 +68,11 @@ void CMovableSprite::rotateSprite() {
  * 
  * */
 int CMovableSprite::getRelationToCenter() {
-	int center = (SCREEN_WIDTH/2) - curAnimation->getXOffset();
-	if( cPosition.x > center )
+	float center = (SCREEN_WIDTH/2);// - curAnimation->getXOffset();
+	float spriteCenter = (cPosition.x - curAnimation->getXOffset()) + cDimension.width/2;
+	if( spriteCenter > center )
 		return 1;
-	else if( cPosition.x < center )
+	else if( spriteCenter < center )
 		return -1;
 	else return 0;
 }

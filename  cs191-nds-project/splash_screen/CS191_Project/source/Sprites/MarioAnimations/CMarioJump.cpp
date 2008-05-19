@@ -8,20 +8,22 @@ CMarioJump::CMarioJump()
 	numImages = 3;
 	animationLocked = false;
 	imageSize = 32;
+	spriteOffset = 15;
+
 }
 
 CMarioJump::~CMarioJump()
 {
 }
 
-void CMarioJump::update(SpriteEntry *se) {
+void CMarioJump::update(CSprite *sprite) {
+
+	dmaCopy(	(void*)&mario_spritesBitmap[(spriteOffset+curImage) * IMAGE_SIZE_32x32H],
+				SPRITE_GFX+(4096*sprite->getSpriteIndex()),
+    			IMAGE_SIZE_32x32);
 
 	if( jump ) {
 	
-		dmaCopy(	(void*)&mario_jumpBitmap[curImage * IMAGE_SIZE_32x32H],
-	    			(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
-	    			IMAGE_SIZE_32x32);
-
 		if( curImage < numImages )
 		{
 			curImage++;
@@ -32,10 +34,6 @@ void CMarioJump::update(SpriteEntry *se) {
 		}
 	}
 	else {	//crouching
-
-		dmaCopy(	(void*)&mario_crouchBitmap[curImage * IMAGE_SIZE_32x32H],
-	    			(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
-	    			IMAGE_SIZE_32x32);
 
 		if( curImage < numImages )
 		{
@@ -49,31 +47,31 @@ void CMarioJump::update(SpriteEntry *se) {
 	}
 }
 
-void CMarioJump::load(SpriteEntry *se) {
+void CMarioJump::load(CSprite *sprite) {
 	mobilityLocked = true;
 	curImage = 0;
 	numImages = 2;
+	spriteOffset = 13;
 	jump = false;
-	this->se = se;
+	this->sprite = sprite;
+	sprite->setObjSize(OBJSIZE_32);
 	
-	se->objSize = OBJSIZE_32;
-	
-//	tileIdx = se->tileIdx;
-
 	// Load the sprite palette.
-	dmaCopy(mario_crouchPalette, &SPRITE_PALETTE[se->tileIdx * MAX_PALETTE_SIZE], mario_crouchPaletteLength);
+//	dmaCopy(mario_crouchPalette, &SPRITE_PALETTE[se->tileIdx * MAX_PALETTE_SIZE], mario_crouchPaletteLength);
 
-	update(se);
+	update(sprite);
 }
 
 void CMarioJump::loadJump() {
 	curImage = 0;
 	numImages = 3;
+	spriteOffset = 15;
 	jump = true;
+	
 
 	// Load the sprite palette.
-	dmaCopy(mario_jumpPalette, &SPRITE_PALETTE[se->tileIdx * MAX_PALETTE_SIZE], mario_jumpPaletteLength);
+//	dmaCopy(mario_jumpPalette, &SPRITE_PALETTE[se->tileIdx * MAX_PALETTE_SIZE], mario_jumpPaletteLength);
 
-	update(se);
+	update(sprite);
 	
 }

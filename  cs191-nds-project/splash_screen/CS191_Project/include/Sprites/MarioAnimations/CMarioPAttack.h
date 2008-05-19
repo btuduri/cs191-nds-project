@@ -5,9 +5,10 @@
 //Primary attack
 #include "ProjectLib.h"
 #include "CAnimation.h"
-#include "../graphics/mario_pattack1.h"
-#include "../graphics/mario_pattack2.h"
-#include "../graphics/mario_pattack3.h"
+//#include "../graphics/mario_pattack1.h"
+//#include "../graphics/mario_pattack2.h"
+//#include "../graphics/mario_pattack3.h"
+#include "../graphics/mario_sprites.h"
 
 #define MAX_ATTACKS 3
 
@@ -17,8 +18,8 @@ public:
 	CMarioPAttack();
 	virtual ~CMarioPAttack();
 
-	void update(SpriteEntry *se);
-	void load(SpriteEntry *se);
+	void update(CSprite *sprite);
+	void load(CSprite *sprite);
 			
 private:
 	void loadA();		// first punch

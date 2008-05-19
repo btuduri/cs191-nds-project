@@ -9,6 +9,8 @@
 #define CKL_XMAXSCROLL 210
 #define CKL_XMINSCROLL -85
 
+#define CKL_YMAXSCROLL 210
+#define CKL_YMINSCROLL -50
 
 /* CKirbyMap
  * 

@@ -13,7 +13,7 @@ CMarioWalk::~CMarioWalk()
 {
 }
 
-void CMarioWalk::update(SpriteEntry *se) {
+void CMarioWalk::update(CSprite *sprite) {
 	
 //	if(nextImage > curImage)	//increasing
 //	{
@@ -36,10 +36,10 @@ void CMarioWalk::update(SpriteEntry *se) {
 
 }
 
-void CMarioWalk::load(SpriteEntry *se) {
+void CMarioWalk::load(CSprite *sprite) {
 
 	// Load the sprite palette.
-	dmaCopy(mario_idlePalette, &SPRITE_PALETTE[se->tileIdx * MAX_PALETTE_SIZE], mario_idlePaletteLength);
+//	dmaCopy(mario_idlePalette, &SPRITE_PALETTE[se->tileIdx * MAX_PALETTE_SIZE], mario_idlePaletteLength);
 	
 	// Load the sprite binary data into the VRAM
 //	dmaCopy(mario_idleBitmap, SPRITE_GFX, mario_idleBitmapLength);
