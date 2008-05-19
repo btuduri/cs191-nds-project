@@ -2,25 +2,28 @@
 #include "CPlaygroundScreen.h"
 //#include "CMario.h"
 //#include "CKirbyMap.h"
+#include "CDraw.h"
+#include "CPoint.h"
+#include "CColor.h"
+#include "CBasicObject.h"
+#include "CPlatform.h"
+
 
 CSpriteManager *csm;
 CMap *map;
-CMovableSprite *player1;
-CMovableSprite *player2;
+CPlayer *player1;
+CPlayer *player2;
 
 
 void player1Update()
 {
 	player1->update();
+//	csm->updateOAM();
 }
 
 void player2Update()
 {
-//	player2->setAngleRad(player2->getAngleRad() + .5);
-//	player2->rotateSprite();
-//	errColor.cyan();
-//	Error();
-	player2->update();
+//	player2->update();
 }
 
 
@@ -32,14 +35,16 @@ void CPlaygroundScreen::loadVideo()
 
 	// Setup VRAM_B for Sprite Binary data
 	vramSetBankB(VRAM_B_MAIN_SPRITE_0x06400000);
-
 	//Sub screen
 //	videoSetModeSub( MODE5 | DISPLAY_BG2_ACTIVE );
-//	vramSetBankC(VRAM_C_SUB_BG_0x06200000);
+
+	vramSetBankC(VRAM_C_SUB_BG_0x06200000);
+
 	videoSetModeSub(MODE_0_2D | DISPLAY_BG0_ACTIVE);
 	vramSetBankC(VRAM_C_SUB_BG);
 	BG_PALETTE_SUB[255] = RGB15(31,31,31);	//by default font will be rendered with color 255
 
+	
 }
 
 /* loadBackground
@@ -48,7 +53,6 @@ void CPlaygroundScreen::loadVideo()
 void CPlaygroundScreen::loadBackground()
 {
 	
-	map->loadMap();
 //	// Main screen background
 //	BG2_CR = BG_COLOR_256 | BG_RS_32x32 | BG_PRIORITY_0 | BG_BMP_BASE(0);//  | BG_MAP_BASE(0) | BG_TILE_BASE(1);// | BG_WRAP_OFF;
 ////	BG2_CR = BG_COLOR_256 | BG_RS_64x64 | BG_PRIORITY_0 | BG_MAP_BASE(0) | BG_TILE_BASE(2); // | BG_WRAP_OFF;
@@ -61,14 +65,15 @@ void CPlaygroundScreen::loadBackground()
 //    BG2_CX = 0;
 //	BG2_CY = 0;
 	
-/*	// Sub screen background
+	// Sub screen background
 	SUB_BG2_CR = BG_BMP16_256x256 | BG_BMP_BASE(0) | BG_PRIORITY_0;
 	SUB_BG2_XDX = 1 << 8;
 	SUB_BG2_XDY = 0;
 	SUB_BG2_YDX = 0;
 	SUB_BG2_YDY = 1 << 8;
 	SUB_BG2_CX = 0;
-	SUB_BG2_CY = 0;	*/
+	SUB_BG2_CY = 0;	
+
 }
 
 void CPlaygroundScreen::processInput()
@@ -132,78 +137,155 @@ int CPlaygroundScreen::run()
 	powerON(POWER_ALL);
 	irqEnable(IRQ_VBLANK);
 	
+	loadVideo();
+	loadBackground();	
+
+	CCollisionManager *cm = new CCollisionManager();
+	
 	CSpriteManager *sm = new CSpriteManager();
 	csm = sm;
 
-	//assert(false);
-//	CMario * mario = new CMario();
-//	sm->registerSprite(mario);
-//	player1 = mario;
-
 	CKirbyMap * kirbyMap = new CKirbyMap();
 	map = kirbyMap;
-//	CMario * mario1 = new CMario();
-//	sm->registerSprite(mario1);
-//	player2 = mario1;
-//	player2->setPosition(150,50);
+	map->loadMap();
+	
+//	CMovableSprite * cms = (CMovableSprite*) mario1->getSprite();
+//	cms->setTileIndex(5);
 
-	
-//	CControls * controls = new CControls(map, player1);
-	
-	loadVideo();
-	loadBackground();	
 	//console
 	SUB_BG0_CR = BG_MAP_BASE(31); 	// Set up the console.
-	// consoleInit() is a lot more flexible but this gets you up and running quick
+//	 consoleInit() is a lot more flexible but this gets you up and running quick
 	consoleInitDefault((u16*)SCREEN_BASE_BLOCK_SUB(31), (u16*)CHAR_BASE_BLOCK_SUB(0), 16);
-	
 
+	CMarioSprite *marioSprite;
+	CMario * mario = new CMario();
+	marioSprite = mario->getSprite();
+	sm->registerSprite(mario->getSprite());
+	marioSprite->setCollisionManager(cm);
+	player1 = mario;
+	
+	CMario * mario1 = new CMario();
+	marioSprite = mario1->getSprite();
+	sm->registerSprite(marioSprite);
+	marioSprite->setCollisionManager(cm);
+	player2 = mario1;
+	player2->setPlayerX(150);
+	player2->setPlayerY(50);
+		
+	CControls * controls = new CControls(map, player1, cm);
+	//register all none player sprites
+//	controls->registerSprite(mario1->getSprite());
 	
 	// Setup Timer 2 for player 1
-	TIMER2_DATA = TIMER_FREQ_1024(8);
+	TIMER2_DATA = TIMER_FREQ_1024(8);//8
 	TIMER2_CR = TIMER_DIV_1024 | TIMER_IRQ_REQ | TIMER_ENABLE;
 	irqSet(IRQ_TIMER2, 	player1Update);
-	
-	
+
 	// Setup Timer 3 for player 2
-//	TIMER3_DATA = TIMER_FREQ_1024(16);
-//	TIMER3_CR = TIMER_DIV_1024 | TIMER_IRQ_REQ | TIMER_ENABLE;
-//	irqSet(IRQ_TIMER3, 	player2Update);
-//	
+	TIMER3_DATA = TIMER_FREQ_1024(4);
+	TIMER3_CR = TIMER_DIV_1024 | TIMER_IRQ_REQ | TIMER_ENABLE;
+	irqSet(IRQ_TIMER3, 	player2Update);
+	
 	// Copy the data from program memory to VRAM.	
 //	dmaCopy(level01Pal, BG_PALETTE, level01PalLen);
 //
 //	dmaCopy(level01Bitmap, (void*)BG_BMP_RAM(0), level01BitmapLen);
 	
-
-	// Load the map.
-//	dmaCopy(level2Pal, BG_PALETTE, level2PalLen);	
-//	dmaCopy(level2Map, (u16*)SCREEN_BASE_BLOCK(0), level2MapLen);    
-	// Load the tile graphics.
-//	dmaCopy(level2Tiles, (u16*)BG_TILE_RAM(2), level2TilesLen); 
+	u16* screen_buffer = (u16*)0x06040000;
+	CDraw * canvas = new CDraw();
 	
-//	swiDecompressLZSSVram((void*)level01Bitmap, BG_GFX, 0, &level01_decomp);
-	// Copy the data from program memory to VRAM.
-	//dmaCopy(titleBitmap, (u16*)BG_BMP_RAM_SUB(0), titleBitmapLen);
-	// Load the palette (thanks WinGrit)
-//	dmaCopy(levelPal, BG_PALETTE, levelPalLen);	
-//	dmaCopy(levelBitmap, (void*)BG_BMP_RAM(0), levelBitmapLen);
- 
+	CPlatform *ground = new CPlatform();
+	ground->setCollidable(true);
+	ground->setX((15-100)*2);
+	ground->setY((174-100)*2);
+	ground->setWidth(452);
+	ground->setHeight(72);
+	controls->registerObject(ground);
+
+	CPlatform *leftPlatform = new CPlatform();
+	leftPlatform->setCollidable(true);
+	leftPlatform->setX((40-100)*2);
+	leftPlatform->setY((135-100)*2);
+	leftPlatform->setWidth(84);
+	leftPlatform->setHeight(1);
+	controls->registerObject(leftPlatform);
+
+	CPlatform *rightPlatform = new CPlatform();
+	rightPlatform->setCollidable(true);
+	rightPlatform->setX((174-100)*2);
+	rightPlatform->setY((135-100)*2);
+	rightPlatform->setWidth(88);
+	rightPlatform->setHeight(1);
+	controls->registerObject(rightPlatform);
+	
+	canvas->drawRectangle(screen_buffer, CPoint((int)ground->getX(),(int)ground->getY()), CPoint((int)ground->getX()+25,(int)ground->getY()+25),CColor(10,10,10), true);
+
 	bool showing = true;
-	while (showing) {
+	
+	while (true) {
+		
+		controls->processInput();
+		csm->updateOAM();
 
-//		processInput();
-//		controls->processInput();
-		sm->updateOAM();
-
+		swiWaitForVBlank();
+		
 //		if ( !(REG_KEYINPUT & KEY_START))
 //			showing = false;
 //		mario->update();
 //		mario1->update();
-		swiWaitForVBlank();
-		//sm->updateOAM();
+
+
+		player1->setPlayerCollidable(false);
+		iprintf("\x1b[5;0H                                              ");
+		iprintf("\x1b[5;0HisCollidable(): %d", player1->isPlayerCollidable());
+
+		int x, y, x1,y1;
+		x = (int)ground->getX();
+		y = (int)ground->getY();
+		x1 = (int)ground->getX()+(int)ground->getWidth();
+		y1 = (int)ground->getY()+(int)ground->getHeight();
+		if(x<0) x = 0;
+		if(y<0) y = 0;
+		if(x1>=SCREEN_WIDTH) x1 = SCREEN_WIDTH-1;
+		if(y1>=SCREEN_HEIGHT) y1 = SCREEN_HEIGHT-1;
+		
+		if((x<SCREEN_WIDTH) && (x1>0) && (y<SCREEN_HEIGHT) && (y1>0))
+		{
+			for(int i=0; i<SCREEN_WIDTH*SCREEN_HEIGHT; i++)
+				screen_buffer[i] = 0;
+
+			canvas->drawRectangle(	screen_buffer,
+								CPoint(x,y),
+								CPoint(x1,y1),
+								CColor(50,0,0), false);
+		}
+		
+		if(player1->isPlayerCollidable())
+		{
+//			canvas->drawRectangle(screen_buffer, CPoint(0,0), CPoint(256,256), CColor(15,15,15), true);
+	
+			canvas->drawRectangle(	screen_buffer,
+									CPoint((int)ground->getX(),(int)ground->getY()),
+									CPoint((int)ground->getX()+ground->getWidth(),(int)ground->getY()+ground->getHeight()),
+									CColor(0,15,0), true);
+	
+			
+			canvas->drawRectangle(screen_buffer,
+					CPoint((int)mario1->getPlayerX(), (int)mario1->getPlayerY()),
+					CPoint((int)(mario1->getPlayerX()+mario1->getPlayerWidth()), (int)(mario1->getPlayerY()+mario1->getPlayerHeight())),
+					CColor(0,15,0),
+					false);
+	
+			canvas->drawRectangle(screen_buffer,
+					CPoint((int)mario->getPlayerX(), (int)mario->getPlayerY()),
+					CPoint((int)(mario->getPlayerX()+mario->getPlayerWidth()), (int)(mario->getPlayerY()+mario->getPlayerHeight())),
+					CColor(15,0,0),
+					false);
+		}
+
 	}	
 	
 	return 0;
 }
+	
 

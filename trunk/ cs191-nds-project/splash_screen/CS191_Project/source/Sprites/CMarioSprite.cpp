@@ -11,49 +11,105 @@ void CMarioSprite::initSprite() {
 	spriteEntry->colMode = OBJCOLOR_256;
 	spriteEntry->objMode = OBJMODE_NORMAL;
 	spriteEntry->objShape = OBJSHAPE_SQUARE;
-	spriteEntry->objSize = OBJSIZE_64;
+	spriteEntry->objSize = OBJSIZE_32;
 	spriteEntry->objPriority = OBJPRIORITY_0;	
 	spriteEntry->rsMatrixIdx = ATTR1_ROTDATA(0);
 	spriteEntry->tileIdx = 0;
-	spriteEntry->isRotoscale = false;//true;
+	spriteEntry->isRotoscale = false;
 	spriteEntry->isHidden = false;
 	
 	setPosition(SCREEN_WIDTH/2-32, 120);
+	setDimensions(32,32);
 
-    //spriteEntry->hFlip = true;
-	
 	// Default the animation lock to false
 	locked = false;
 	xMobility = false;
 	yMobility = false;
 	inAir = false;
+	goingUp = false;
 	isAnimated = true;
 	isLookingRight = true;
 	curAnimation = &aniIdle;
 	angle = 0;
-
+	jumpAmount = 0;
 	runVelocity = MARIO_RUN_VELOCITY;
 	jumpVelocity = MARIO_JUMP_VELOCITY;
-
-	curAnimation->load(spriteEntry);
+	
+	offset64bit = 20;
+	
+	// copy over the palette.
+	// In this case we only use 1 palette (all sprites on the same sheet, wooo!)
+	dmaCopy(mario_spritesPalette, SPRITE_PALETTE, mario_spritesPaletteLength);
+	
+	curAnimation->load(this);
 	
 }
 
 void CMarioSprite::update() {
 	
-	curAnimation->update(spriteEntry);
-
-	if(curAnimation->allowedMobile()) {
+	curAnimation->update(this);
+	
+//	if(curAnimation->allowedMobile()) {
 		if( inAir )
 		{
-			gravity();
+			if( !goingUp )
+			{
+				if( cm->checkObjectCollisions(this, getX(), getY()-MARIO_JUMP_VELOCITY-2) )
+				{
+					if( cm->getLastObjectTouched()->getCollisionDirection() == CBasicObject::CDtop )
+					{
+						setY((cm->getLastObjectTouched()->getY())-getHeight());
+						inAir = false;
+						setYVelocity(0);
+					}
+				}				
+			}
+			else
+				falling();
+//			gravity();
 		}
+		else
+		{
+			if( !cm->checkObjectCollisions(this, getX(), getY()-MARIO_JUMP_VELOCITY-2) ) //make sure we're on ground
+			{
+				inAir = true;
+				falling();
 
-		updatePosition(curAnimation->getXOffset(), curAnimation->getYOffset());
-	}
+				if( curAnimation != &aniJump )
+				{
+					unlockYMobility();
+					curAnimation = &aniJump;
+					aniJump.loadJump();
+					setDimensions(curAnimation->getImageSize(), curAnimation->getImageSize());
+//					update();
+				}
+			}
+		}
+		
+		updatePosition();
+//	}
 	
 }
 
+void CMarioSprite::falling() {
+
+	jumpAmount--;
+	if(jumpAmount <= 0)
+	{
+		goingUp = false;
+		unlockYMobility();
+		setYVelocity((-MARIO_JUMP_VELOCITY)-2);
+	}
+		
+}
+
+void CMarioSprite::jumping() {
+	
+	jumpAmount = MARIO_JUMP_AMOUNT;
+	goingUp = true;
+}
+
+/*
 void CMarioSprite::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up, u32 keys_held ) {
 	
 //	if( inAir && !(keys_held & KEY_UP) )
@@ -96,13 +152,10 @@ void CMarioSprite::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up
 	{
 		if( keys_up & KEY_A )
 		{
-			//TODO: write this
 		}
 		else if( keys_up & KEY_B )
 		{
-			//TODO: write this
 		}
-		//TODO: add others here...
 		else {
 			//jump
 			if( curAnimation != &aniJump )
@@ -125,16 +178,13 @@ void CMarioSprite::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up
 	{
 //		errColor.cyan();
 //		Error();
-		//TODO: write this
 	}
 	
 	if( ((keys_down & KEY_DOWN) || (keys_held & KEY_DOWN)) &&  (keys_up & KEY_B) )
 	{
 //		errColor.blue();
 //		Error();
-		//TODO: write this
 	}
-	//TODO: add others here...
 	
 	//crouch
 	if( (keys_down & KEY_DOWN) || (keys_up & KEY_DOWN) )
@@ -163,28 +213,24 @@ void CMarioSprite::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up
 // Key B	
 	if(keys_up & KEY_B)
 	{
-		//TODO: write this
 //		return;
 	}
 
 //Key X
 	if(keys_up & KEY_X)
 	{
-		//TODO: write this
 //		return;
 	}
 	
 //Key L
 	if(keys_up & KEY_L)
 	{
-		//TODO: write this
 //		return;
 	}
 	
 //Key R
 	if(keys_up & KEY_R)
 	{		
-		//TODO: write this
 //		return;
 	}	
 	
@@ -223,40 +269,158 @@ void CMarioSprite::updateAnimation( bool key_pressed, u32 keys_down, u32 keys_up
 		
 
 //	}
-}
+}*/
 
-void CMarioSprite::leftKey() {
-
+void CMarioSprite::noKeysPressed() {
+	// Make sure the animation isn't locked
 	if( curAnimation->isAnimationLocked() )
 		return;
 	
-	if(getFacingDirection()!= FACING_LEFT)
-		setFacingDirection(FACING_LEFT);
-	
-	if( (curAnimation != &aniRun) )
+	if( inAir )
 	{
-		curAnimation = &aniRun;
-		curAnimation->load(spriteEntry);
-		update();
+		setXVelocity(0);
+		return;
 	}
 	
-}
-
-void CMarioSprite::rightKey() {
-
-	if( curAnimation->isAnimationLocked() )
-		return;
-
-	if(getFacingDirection()!= FACING_RIGHT)
-		setFacingDirection(FACING_RIGHT);
-
-	if( (curAnimation != &aniRun) )
+	setXVelocity(0);
+	setYVelocity(0);
+	
+	if( curAnimation != &aniIdle )
 	{
-		curAnimation = &aniRun;
-		curAnimation->load(spriteEntry);
+		setObjSize(OBJSIZE_32);
+//		spriteEntry->objSize = OBJSIZE_32;
+		curAnimation = &aniIdle;
+		setDimensions(curAnimation->getImageSize(), curAnimation->getImageSize());
+		curAnimation->load(this);
 		update();
 	}
 }
 
-void CMarioSprite::upKey(){}
-void CMarioSprite::downKey(){}
+void CMarioSprite::dPadKey(Direction d){
+
+	switch(d) {
+	
+		case none: break;
+	
+		case left:		//run left
+			if( curAnimation->isAnimationLocked() )
+				return;
+	
+			if( (curAnimation != &aniRun) && !inAir  )
+			{
+				curAnimation = &aniRun;
+				curAnimation->load(this);
+				setDimensions(curAnimation->getImageSize(), curAnimation->getImageSize());
+				update();
+			}
+	
+			if(getFacingDirection()!= FACING_LEFT)
+				setFacingDirection(FACING_LEFT);
+	
+			setXVelocity(-getRunVelocity());
+			break;
+			
+		case right:		//run right
+			if( curAnimation->isAnimationLocked() )
+				return;
+
+			if(getFacingDirection()!= FACING_RIGHT)
+				setFacingDirection(FACING_RIGHT);
+
+			if( (curAnimation != &aniRun) && !inAir )
+			{
+				curAnimation = &aniRun;
+				curAnimation->load(this);
+				setDimensions(curAnimation->getImageSize(), curAnimation->getImageSize());
+				update();
+			}
+			
+			setXVelocity(getRunVelocity());
+			break;
+			
+		case up:		//jump
+
+			if( curAnimation->isAnimationLocked() )
+				return;
+
+			if( curAnimation != &aniJump )
+			{
+				inAir = true;
+				unlockYMobility();
+				curAnimation = &aniJump;
+				curAnimation->load(this);
+				setDimensions(curAnimation->getImageSize(), curAnimation->getImageSize());
+				setYVelocity(MARIO_JUMP_VELOCITY);
+				jumping();
+				update();
+			}
+			break;
+
+		case down:		// crouch
+			if(inAir)
+				return;
+			
+			if( curAnimation != &aniCrouch )
+			{
+				curAnimation = &aniCrouch;
+				setDimensions(curAnimation->getImageSize(), curAnimation->getImageSize());
+				setXVelocity(0);
+			}
+			curAnimation->load(this);
+			break;
+
+		case leftUp:
+			break;
+		case leftDown:
+			break;
+		case rightUp:
+			break;
+		case rightDown:
+			break;
+	};
+	
+}
+
+
+void CMarioSprite::aKey(Direction d) {
+		switch(d) {
+			
+			case none:
+				if( curAnimation != &aniPAttack )
+				{
+					curAnimation = &aniPAttack;
+					setDimensions(curAnimation->getImageSize(), curAnimation->getImageSize());
+					curAnimation->load(this);			
+					update();
+				}
+				else 
+					curAnimation->load(this);			
+
+				break;
+				
+			case left:
+				break;
+			case right:
+				break;
+			case up:
+				break;
+			case down:
+				break;
+			case leftUp:
+				break;
+			case leftDown:
+				break;
+			case rightUp:
+				break;
+			case rightDown:
+				break;
+		};
+}
+
+void CMarioSprite::bKey(Direction d){}
+void CMarioSprite::xKey(Direction d){}
+void CMarioSprite::yKey(Direction d){}
+void CMarioSprite::leftKey(Direction d){}
+void CMarioSprite::rightKey(Direction d){}
+void CMarioSprite::startKey(){}
+void CMarioSprite::selectKey(){}

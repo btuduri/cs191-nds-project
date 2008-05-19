@@ -6,16 +6,18 @@ CMarioRun::CMarioRun()
 	yoffset = 0;
 	curImage = 0;
 	numImages = 8;
+	imageSize = 32;
+	spriteOffset = 5;
 }
 
 CMarioRun::~CMarioRun()
 {
 }
 
-void CMarioRun::update(SpriteEntry *se) {
+void CMarioRun::update(CSprite *sprite) {
 	
-	dmaCopy(	(void*)&mario_runBitmap[curImage * IMAGE_SIZE_32x32H],
-    			(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
+	dmaCopy(	(void*)&mario_spritesBitmap[(spriteOffset+curImage) * IMAGE_SIZE_32x32H],
+				SPRITE_GFX+(4096*sprite->getSpriteIndex()),
     			IMAGE_SIZE_32x32);
 	
 	curImage++;
@@ -24,15 +26,14 @@ void CMarioRun::update(SpriteEntry *se) {
 		curImage = 0;
 }
 
-void CMarioRun::load(SpriteEntry *se) {
+void CMarioRun::load(CSprite *sprite) {
 
-	se->objSize = OBJSIZE_32;
-
+	sprite->setObjSize(OBJSIZE_32);
 	curImage = 0;
-	
+	update(sprite);
 	// Load the sprite palette.
-	dmaCopy(mario_runPalette, &SPRITE_PALETTE[se->tileIdx * MAX_PALETTE_SIZE], mario_runPaletteLength);
+//	dmaCopy(mario_runPalette, &SPRITE_PALETTE[se->tileIdx * MAX_PALETTE_SIZE], mario_runPaletteLength);
 
-	update(se);
+//	update(se);
 }
 

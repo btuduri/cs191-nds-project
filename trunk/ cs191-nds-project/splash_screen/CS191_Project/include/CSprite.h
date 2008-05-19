@@ -43,7 +43,11 @@ public:
 	u8 getRotIndex() { return rotIndex; }
 	
 	// Handle sprite variable code here (getters/setters)
+	void setSpriteIndex(int index){ spriteIndex = index; }
+	u16 getSpriteIndex(){ return spriteIndex; }
 	void setTileIndex(int index){ spriteEntry->tileIdx = index; }
+	void setObjPal(int objPal){ spriteEntry->objPal = objPal; }
+	void setObjSize( tObjSize size ) { spriteEntry->objSize = size; }
 	void setSpriteEntry(SpriteEntry *se) { spriteEntry = se; }
 	bool isSpriteHidden(){return spriteEntry->isHidden;}
 	
@@ -52,20 +56,25 @@ public:
 	void toggleFacingDirection();
 	bool getFacingDirection(){ return isLookingRight; }
 	
+	bool checkIfOnScreen();
+	
+	int get64bitOffset(){return offset64bit;}
+	
 protected:
 	bool locked;
-	u32 tileIndex;
-	
+	u16 spriteIndex;			//sprite index in the OAM
 	u8 rotIndex;
 	bool affine;				//the image is affected by affine matrices
 	bool doubleBound;			//used to increase the boundry limit of the image (if the rotation becomes clipped)
 	bool isAnimated;
-	bool isLookingRight;				//used to keep track of which way the sprite is facing (true for right, false for left)
+	bool isLookingRight;		//used to keep track of which way the sprite is facing (true for right, false for left)
+	bool isOffScreen;
 	
 	float angularVelocity;
 	float angle;				// in radians
 	
 	u16 spriteSize;
+	int offset64bit;
 	
 	SpriteEntry *spriteEntry;
 	SpriteRotation *spriteRotation;

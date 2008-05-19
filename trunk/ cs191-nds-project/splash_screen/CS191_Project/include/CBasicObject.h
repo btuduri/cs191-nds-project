@@ -10,7 +10,13 @@
 class CBasicObject {
 
 public:
-	CBasicObject() {};
+	CBasicObject() {
+		collidable = false;
+		rightCollidable = false;
+		leftCollidable = false;
+		topCollidable = false;
+		bottomCollidable = false;
+}
 	virtual ~CBasicObject() {};
 	
 	// x vars
@@ -19,25 +25,68 @@ public:
 	
 	// y vars
 	float getY(){return cPosition.y;}
-	void setY(float y){cPosition.y = y;}
+	void setY(float y){ cPosition.y = y; }
 	
 	void setPosition(float x, float y) {
 		cPosition.x = x;
 		cPosition.y = y;
 	}
-;
 	
+	// width
+	float getWidth(){return cDimension.width;}
+	void setWidth(float width){cDimension.width = width;}
+	
+	// height
+	float getHeight(){return cDimension.height;}
+	void setHeight(float height){cDimension.height = height;}
+	
+	void setDimensions(float width, float height) {
+		cDimension.width = width;
+		cDimension.height = height;
+	}
+	
+	virtual bool checkForCollision(CBasicObject * obj, float toX, float toY);
+
+	void setCollidable( bool isCollidable ){ collidable = isCollidable; }
+	bool isCollidable(){ return collidable; }
+	
+	typedef enum CollisionDirection {
+		CDtop,
+		CDright,
+		CDleft,
+		CDbottom,
+		CDtopRight,
+		CDtopLeft,
+		CDbottomRight,
+		CDbottomLeft
+	};
+
+	void setCollisionDirection(CollisionDirection direction){ collisionDirection = direction; }
+	CollisionDirection getCollisionDirection(){ return collisionDirection; }
+
 protected:
-	
-	typedef struct position{
+
+	typedef struct position {
 		float x;
 		float y;
 	} Position;
 	
-	Position cPosition;
+	typedef struct dimensions {
+		float width;
+		float height;
+	} Dimensions;
 	
-//	const unsigned short * activeBG;
-//TODO: ADD sprites to objects if needed
+	Position cPosition;
+	Dimensions cDimension;
+
+	bool collidable;
+	
+	bool rightCollidable;
+	bool leftCollidable;
+	bool topCollidable;
+	bool bottomCollidable;
+	
+	CollisionDirection collisionDirection;
 	
 };
 

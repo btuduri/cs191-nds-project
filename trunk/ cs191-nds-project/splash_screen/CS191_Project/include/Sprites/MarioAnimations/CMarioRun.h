@@ -4,7 +4,8 @@
 
 #include "ProjectLib.h"
 #include "CAnimation.h"
-#include "../graphics/mario_run.h"
+//#include "../graphics/mario_run.h"
+#include "../graphics/mario_sprites.h"
 
 class CMarioRun : public CAnimation
 {
@@ -12,8 +13,8 @@ public:
 	CMarioRun();
 	virtual ~CMarioRun();
 
-	void update(SpriteEntry *se);
-	void load(SpriteEntry *se);
+	void update(CSprite *sprite);
+	void load(CSprite *sprite);
 	
 private:
 	u16 curImage;

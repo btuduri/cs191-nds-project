@@ -3,7 +3,7 @@
 #ifndef PROJECTLIB_H_
 #define PROJECTLIB_H_
 
-#define DEBUG 1
+#define DEBUG 0
 
 // Forward-Declarations
 //class CBasicObject;
@@ -73,6 +73,7 @@ enum PlayerType {
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector.h>
 #include <cassert>
 #include <time.h>
 

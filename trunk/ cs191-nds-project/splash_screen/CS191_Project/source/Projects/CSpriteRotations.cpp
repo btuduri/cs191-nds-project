@@ -28,7 +28,7 @@ void CSpriteRotations::initSprite() {
 
 void CSpriteRotations::update() {
 	
-	updatePosition(0,0);
+	updatePosition();
 	updateAngle();
 	
 	// Load the sprite palette.

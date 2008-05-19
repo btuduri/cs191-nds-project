@@ -14,29 +14,34 @@ CMarioPAttack::~CMarioPAttack()
 {
 }
 
-void CMarioPAttack::update(SpriteEntry *se) {
+void CMarioPAttack::update(CSprite *sprite) {
 
-//	se->tileIdx = curImage * 128;	
-	switch(attack)
-	{
-		case 0:
-				dmaCopy(	(void*)&mario_pattack1Bitmap[curImage * IMAGE_SIZE_64x64H],
-							(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
-									IMAGE_SIZE_64x64);
-				break;
-		case 1:
-				dmaCopy(	(void*)&mario_pattack2Bitmap[curImage * IMAGE_SIZE_64x64H],
-							(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
-									IMAGE_SIZE_64x64);
-				break;
-		case 2:
-				dmaCopy(	(void*)&mario_pattack3Bitmap[curImage * IMAGE_SIZE_64x64H],
-							(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
-									IMAGE_SIZE_64x64);
-				break;
-		default:
-			assert(false);
-	};
+	sprite->setObjSize(OBJSIZE_64);
+
+	dmaCopy(	(void*)&mario_spritesBitmap[(sprite->get64bitOffset()*IMAGE_SIZE_32x32H)+((spriteOffset+curImage) * IMAGE_SIZE_64x64H)],
+				SPRITE_GFX+(4096*sprite->getSpriteIndex()),
+    			IMAGE_SIZE_64x64);
+
+//	switch(attack)
+//	{
+//		case 0:
+//				dmaCopy(	(void*)&mario_pattack1Bitmap[curImage * IMAGE_SIZE_64x64H],
+//							(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
+//									IMAGE_SIZE_64x64);
+//				break;
+//		case 1:
+//				dmaCopy(	(void*)&mario_pattack2Bitmap[curImage * IMAGE_SIZE_64x64H],
+//							(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
+//									IMAGE_SIZE_64x64);
+//				break;
+//		case 2:
+//				dmaCopy(	(void*)&mario_pattack3Bitmap[curImage * IMAGE_SIZE_64x64H],
+//							(void*)&SPRITE_GFX[se->tileIdx * OFFSET_MULTIPLIER],
+//									IMAGE_SIZE_64x64);
+//				break;
+//		default:
+//			assert(false);
+//	};
 	
 	//animation is always increasing (i.e. its a one-way animation)	
 	if( curImage < (numImages-1) )
@@ -54,24 +59,34 @@ void CMarioPAttack::update(SpriteEntry *se) {
 			switch(attack)
 			{
 //				case 0: loadA(); errColor.cyan(); Error(); break;
-				case 1: loadB(); update(se); break;
-				case 2: loadC(); update(se); break;
+				case 1: 
+					loadB();
+					update(sprite);
+					break;
+				case 2:
+					loadC();
+					if( !sprite->getFacingDirection() )
+						xoffset = 26;
+					update(sprite);
+					break;
 //				default: loadA(); errColor.magenta(); Error();	//this shouldn't happen
 			}
 		}
 		else { 				//otherwise, unlock the animation so a different animation can play
 			animationLocked = false;
+			mobilityLocked = false;
 		}
 	}
 }
 
-void CMarioPAttack::load(SpriteEntry *se) {
+void CMarioPAttack::load(CSprite *sprite) {
 	if( !animationLocked )
 	{
-		tileIdx = se->tileIdx;
-		se->objSize = OBJSIZE_64;
+		animationLocked = true;
+		mobilityLocked = true;
+		sprite->setObjSize(OBJSIZE_64);
 		loadA();
-		update(se);
+		update(sprite);
 	}
 	
 	if( (numAttacks < MAX_ATTACKS) && (attack < (MAX_ATTACKS-1)) )
@@ -83,14 +98,14 @@ void CMarioPAttack::load(SpriteEntry *se) {
 
 // punch attack
 void CMarioPAttack::loadA() {
-	animationLocked = true;
 	curImage = 0;
 	numImages = 6;
 	attack = 0;
 	xoffset = 16;
-	
+	spriteOffset = 0;
+
 	// Load the sprite palette.
-	dmaCopy(mario_pattack1Palette, &SPRITE_PALETTE[tileIdx * MAX_PALETTE_SIZE], mario_pattack1PaletteLength);
+//	dmaCopy(mario_pattack1Palette, &SPRITE_PALETTE[tileIdx * MAX_PALETTE_SIZE], mario_pattack1PaletteLength);
 	
 }
 
@@ -99,9 +114,11 @@ void CMarioPAttack::loadB() {
 	curImage = 0;
 	numImages = 6;
 	attack = 1;
+	xoffset = 16;
+	spriteOffset = 6;
 	
 	// Load the sprite palette.
-	dmaCopy(mario_pattack2Palette, &SPRITE_PALETTE[tileIdx * MAX_PALETTE_SIZE], mario_pattack2PaletteLength);
+//	dmaCopy(mario_pattack2Palette, &SPRITE_PALETTE[tileIdx * MAX_PALETTE_SIZE], mario_pattack2PaletteLength);
 	
 }
 
@@ -111,10 +128,11 @@ void CMarioPAttack::loadC() {
 	curImage = 0;
 	numImages = 6;
 	attack = 2;
-	xoffset = 26;
+	xoffset = 0;//26;
+	spriteOffset = 12;
 	
 	// Load the sprite palette.
-	dmaCopy(mario_pattack3Palette, &SPRITE_PALETTE[tileIdx * MAX_PALETTE_SIZE], mario_pattack3PaletteLength);
+//	dmaCopy(mario_pattack3Palette, &SPRITE_PALETTE[tileIdx * MAX_PALETTE_SIZE], mario_pattack3PaletteLength);
 
 	
 }

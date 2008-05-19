@@ -25,7 +25,7 @@ public:
 
 	void setVelocity( float vx, float vy ) { cVelocity.vx = vx; cVelocity.vy = vy; }
 	
-	bool gravity();
+//	bool gravity();
 	
 protected:
 

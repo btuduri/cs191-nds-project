@@ -6,7 +6,8 @@
 
 #include "ProjectLib.h"
 #include "CAnimation.h"
-#include "../graphics/mario_idle.h"
+//#include "../graphics/mario_idle.h"
+#include "../graphics/mario_sprites.h"
 
 class CMarioWalk : public CAnimation
 {
@@ -14,8 +15,8 @@ public:
 	CMarioWalk();
 	virtual ~CMarioWalk();
 	
-	void update(SpriteEntry *se);
-	void load(SpriteEntry *se);
+	void update(CSprite *sprite);
+	void load(CSprite *sprite);
 	
 private:
 	u16 nextImage;
